@@ -7,10 +7,10 @@ export default function Footer() {
     { label: "Blogs", href: "/blogs" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
-  ]
+  ];
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-12 pb-10 mt-20 border-t border-gray-300 dark:border-gray-700">
-      <div className=" container mx-auto px-4 md:px-0">
+    <footer className="bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-12 pb-10 mt-20 border-t border-gray-300 dark:border-gray-700">
+      <div className=" mx-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Info */}
           <div>
@@ -23,20 +23,17 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation Links */}
+          {/* Navigation  */}
           <div>
-            <h3 className="text-lg text-primary font-bold mb-2">
-              Quick Links
-            </h3>
+            <h3 className="text-lg text-primary font-bold mb-2">Quick Links</h3>
             <ul className="space-y-2 text-[16px] font-medium ">
-              {
-                links.map(el => <li key={el.label}>
+              {links.map((el) => (
+                <li key={el.label}>
                   <Link href={el.href} className="hover:text-primary">
                     {el.label}
                   </Link>
-                </li>)
-              }
-
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -46,9 +43,7 @@ export default function Footer() {
             <h3 className="text-lg text-[#FF3C48] font-bold mb-4">
               Get in Touch
             </h3>
-            <p className="text-[16px] font-medium">
-              Email: support@foods.com
-            </p>
+            <p className="text-[16px] font-medium">Email: support@foods.com</p>
             <p className="text-[16px] font-medium">Phone: +880 1234-567890</p>
 
             <div className="flex flex-wrap mt-5 gap-3">

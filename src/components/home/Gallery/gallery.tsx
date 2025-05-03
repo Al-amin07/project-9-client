@@ -32,7 +32,7 @@ const GalleryPictureSlider = () => {
   }, [currentIndex]);
 
   return (
-    <div className="px-4 md:px-10">
+    <div className="">
       <h1 className="text-center text-[32px] md:text-[40px] font-normal text-primary font-serif my-10">
         Gallery
       </h1>

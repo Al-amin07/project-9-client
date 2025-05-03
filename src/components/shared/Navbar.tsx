@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white   dark:bg-gray-900 shadow-md sticky top-0 z-30">
-      <div className="container mx-auto py-4 px-4 md:px-0 flex justify-between items-center">
+      <div className=" mx-10 py-4 px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           {/* <Image
@@ -52,10 +52,11 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-base font-semibold transition-colors ${pathname === item.href
-                ? "text-primary"
-                : "text-gray-800 dark:text-white hover:text-primary"
-                }`}
+              className={`text-base font-semibold transition-colors ${
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-gray-800 dark:text-white hover:text-primary"
+              }`}
             >
               {item.label}
             </Link>
@@ -78,7 +79,10 @@ const Navbar = () => {
                       className="rounded-full"
                     />
                   ) : (
-                    <CircleUserRound size={40} className="text-gray-500 cursor-pointer hover:scale-105 duration-500 transition-transform" />
+                    <CircleUserRound
+                      size={40}
+                      className="text-gray-500 cursor-pointer hover:scale-105 duration-500 transition-transform"
+                    />
                   )}
                 </button>
               </DropdownMenuTrigger>
@@ -138,10 +142,11 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`block font-semibold text-md ${pathname === item.href
-                ? "text-primary"
-                : "text-gray-800 dark:text-white hover:text-primary"
-                }`}
+              className={`block font-semibold text-md ${
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-gray-800 dark:text-white hover:text-primary"
+              }`}
             >
               {item.label}
             </Link>

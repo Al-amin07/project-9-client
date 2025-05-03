@@ -5,7 +5,7 @@ import Testimonial from "@/components/home/Testimonials/testimonial";
 
 export default function Home() {
   return (
-    <div>
+    <div className="mx-10">
       <Banner />
       <FoodCategory />
 
