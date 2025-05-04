@@ -46,10 +46,10 @@ export const FAQSection = () => {
             value={`item-${index}`}
             className="border border-[#FF3C48] rounded-xl shadow-sm"
           >
-            <AccordionTrigger className="px-4 py-3 text-left text-lg font-semibold text-[#FF3C48] hover:bg-[#FF3C48]/10 transition-all duration-200 rounded-t-xl">
+            <AccordionTrigger className="px-4 py-3 cursor-pointer text-left text-lg font-semibold text-[#FF3C48] hover:bg-[#FF3C48]/10 transition-all duration-200 rounded-t-xl">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="px-4 py-2 text-gray-700 bg-gray-50 rounded-b-xl">
+            <AccordionContent className="px-4 py-2 text-gray-700 text-[16px] bg-gray-50 rounded-b-xl">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>

@@ -2,6 +2,7 @@ import { ICategory } from "./category.type";
 
 export type PostStatus = "PENDING" | "APPROVED" | "REJECTED";
 
+
 export interface IPost {
   id: string;
   title: string;
