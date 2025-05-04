@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export const  NewsletterSignup=()=> {
+export const NewsletterSignup = () => {
   return (
     <section className="relative bg-[#FFF5F5] py-16 overflow-hidden">
       <h2 className="text-5xl font-extrabold text-center text-[#FF3C48]  ">
@@ -35,7 +35,7 @@ export const  NewsletterSignup=()=> {
             />
             <Button
               type="submit"
-              className="bg-[#FF3C48] hover:bg-[#e0353f] text-white px-6 py-3 rounded-full font-semibold"
+              className="bg-[#FF3C48] cursor-pointer hover:bg-[#e0353f] text-white px-6 py-3 rounded-full font-semibold"
             >
               SUBSCRIBE
             </Button>
@@ -44,4 +44,4 @@ export const  NewsletterSignup=()=> {
       </div>
     </section>
   );
-}
+};
