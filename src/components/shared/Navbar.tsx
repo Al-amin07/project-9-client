@@ -36,7 +36,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-30">
+<nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-30">
       <div className="mx-10 py-4 px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -51,11 +51,10 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-base font-semibold transition-colors ${
-                pathname === item.href
+              className={`text-base font-semibold transition-colors ${pathname === item.href
                   ? "text-primary"
                   : "text-gray-800 dark:text-white hover:text-primary"
-              }`}
+                }`}
             >
               {item.label}
             </Link>

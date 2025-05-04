@@ -1,18 +1,20 @@
+import { ICategory } from "./category.type";
+
 export type PostStatus = "PENDING" | "APPROVED" | "REJECTED";
 
-export interface Post {
+
+export interface IPost {
   id: string;
   title: string;
   description: string;
-  price: number;
   location: string;
   image: string;
-  status: "PENDING" | "APPROVED" | "REJECTED";
+  price: number;
+  priceRange: string;
   isPremium: boolean;
-  category: {
-    id: string;
-    name: string;
-  } | null;
+  status: PostStatus;
+  categoryId: string;
+  category: ICategory;
   userId: string;
   createdAt: string;
   updatedAt: string;
