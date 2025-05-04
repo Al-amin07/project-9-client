@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
-import "./testimonial.css"
+import "./testimonial.css";
 import Image from "next/image";
 
 // const ResizePlugin: KeenSliderPlugin = (slider) => {
@@ -81,9 +81,8 @@ const testimonials = [
       "The overall dining experience here felt like a perfect blend of tradition and creativity. I had their signature rice bowl with beef curry and a side of grilled vegetables, and it was phenomenal.",
     profileImage: "https://i.pravatar.cc/150?img=24",
     rating: 5,
-  }
-]
-
+  },
+];
 
 const Testimonial = () => {
   const [sliderRef] = useKeenSlider(
@@ -106,56 +105,58 @@ const Testimonial = () => {
     },
     [
       (slider) => {
-        let timeout: ReturnType<typeof setTimeout>
-        let mouseOver = false
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
         function clearNextTimeout() {
-          clearTimeout(timeout)
+          clearTimeout(timeout);
         }
         function nextTimeout() {
-          clearTimeout(timeout)
-          if (mouseOver) return
+          clearTimeout(timeout);
+          if (mouseOver) return;
           timeout = setTimeout(() => {
-            slider.next()
-          }, 3000)
+            slider.next();
+          }, 3000);
         }
         slider.on("created", () => {
           slider.container.addEventListener("mouseover", () => {
-            mouseOver = true
-            clearNextTimeout()
-          })
+            mouseOver = true;
+            clearNextTimeout();
+          });
           slider.container.addEventListener("mouseout", () => {
-            mouseOver = false
-            nextTimeout()
-          })
-          nextTimeout()
-        })
-        slider.on("dragStarted", clearNextTimeout)
-        slider.on("animationEnded", nextTimeout)
-        slider.on("updated", nextTimeout)
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", clearNextTimeout);
+        slider.on("animationEnded", nextTimeout);
+        slider.on("updated", nextTimeout);
       },
     ]
   );
 
   return (
-<section className=" py-12 bg-white">
+    <section className=" py-12 bg-white">
+      <h2 className="text-3xl lg:text-4xl font-medium mb-5 font-serif text-primary">
+        What Our Premium Users Say{" "}
+      </h2>
+      <div ref={sliderRef} className="keen-slider mt-6">
+        {testimonials.map((testimonial) => (
+          <div key={testimonial.name} className="keen-slider__slide p-4">
+            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-md sm:p-8">
+              <div className="flex items-center gap-4">
+                <Image
+                  alt={testimonial?.name}
+                  src={testimonial.profileImage}
+                  className="size-14 rounded-full object-cover"
+                  width={40}
+                  height={40}
+                />
 
-        <h2 className="text-3xl lg:text-4xl font-medium mb-5 font-serif text-primary">What Our Premium Users Say </h2>
-        <div ref={sliderRef} className="keen-slider mt-6">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.name} className="keen-slider__slide p-4">
-              <blockquote className="rounded-lg bg-gray-50 p-6 shadow-md sm:p-8">
-                <div className="flex items-center gap-4">
-                  <Image
-                    alt={testimonial?.name}
-                    src={testimonial.profileImage}
-                    className="size-14 rounded-full object-cover"
-                    width={40}
-                    height={40}
-                  />
-
-                  <div>
-                    <div className="flex gap-1 text-yellow-500">
-                      {Array.from({ length: testimonial.rating }).map((_, index) => (
+                <div>
+                  <div className="flex gap-1 text-yellow-500">
+                    {Array.from({ length: testimonial.rating }).map(
+                      (_, index) => (
                         <svg
                           key={index}
                           xmlns="http://www.w3.org/2000/svg"
@@ -165,21 +166,24 @@ const Testimonial = () => {
                         >
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                      ))}
-                    </div>
-                    <p className="mt-1 text-lg  font-medium text-gray-900">{testimonial.name}</p>
+                      )
+                    )}
                   </div>
+                  <p className="mt-1 text-lg  font-medium text-gray-900">
+                    {testimonial.name}
+                  </p>
                 </div>
+              </div>
 
-                <p className="mt-4 text-left line-clamp-3 text-gray-700">{testimonial.testimonial}</p>
-                <p className="text-left text-sm mt-4 text-gray-500">--{testimonial.location}</p>
-              </blockquote>
-
-
-
-            </div>
-          ))}
-        </div>
+              <p className="mt-4 text-left line-clamp-3 text-gray-700">
+                {testimonial.testimonial}
+              </p>
+              <p className="text-left text-sm mt-4 text-gray-500">
+                --{testimonial.location}
+              </p>
+            </blockquote>
+          </div>
+        ))}
       </div>
     </section>
   );
