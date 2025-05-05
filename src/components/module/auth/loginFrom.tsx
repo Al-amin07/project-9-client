@@ -39,8 +39,8 @@ const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const searchParams = useSearchParams();
-    const redirect = searchParams.get('redirect') || '/dashboard';
-    const { setUser } = useAuth()!
+    const { setUser, user } = useAuth()!
+    const redirect = searchParams.get('redirect') || user?.role === "ADMIN" ? "/admin/dashboard" : "/user/dashboard";
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {

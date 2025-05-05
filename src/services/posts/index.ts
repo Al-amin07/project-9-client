@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 "use server";
-
-import { IPost } from "@/types";
-import { IComment } from "@/types/comment.type";
+import { Ipost, IpostComment, IpostVote, Irating } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { IRating } from '../../types/rating.type';
@@ -15,32 +14,29 @@ export const getAllposts = async (
   limit?: string,
   query: { [key: string]: string | undefined } = {}
 ) => {
-  const params = new URLSearchParams()
+  const params = new URLSearchParams();
 
-  if (query.searchTerm) params.append("searchTerm", query.searchTerm)
-  if (query.category) params.append("category", query.category)
-  if (query.location) params.append("location", query.location)
-  if (query.minPrice) params.append("minPrice", query.minPrice)
-  if (query.maxPrice) params.append("maxPrice", query.maxPrice)
+  if (query.searchTerm) params.append("searchTerm", query.searchTerm);
+  if (query.category) params.append("category", query.category);
+  if (query.location) params.append("location", query.location);
+  if (query.minPrice) params.append("minPrice", query.minPrice);
+  if (query.maxPrice) params.append("maxPrice", query.maxPrice);
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post?page=${page}&limit=${limit}&${params}`)
-  const data = await res.json()
-  return data
-}
-
-
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/post?page=${page}&limit=${limit}&${params}`
+  );
+  const data = await res.json();
+  return data;
+};
 
 // get single product
 export const getSinglePost = async (postId: string) => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/post/${postId}`,
-      {
-        next: {
-          tags: ["POST"],
-        },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post/${postId}`, {
+      next: {
+        tags: ["POST"],
+      },
+    });
     const data = await res.json();
     return data;
   } catch (error: any) {
@@ -48,8 +44,8 @@ export const getSinglePost = async (postId: string) => {
   }
 };
 
-// ------------ add product -----------
-export const createPost = async (postData:IPost): Promise<any> => {
+// add product
+export const createPost = async (postData:Ipost): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post`, {
       method: "POST",
@@ -57,8 +53,6 @@ export const createPost = async (postData:IPost): Promise<any> => {
       headers: {
         "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
-       
-
       },
     });
     revalidateTag("POST");
@@ -70,7 +64,7 @@ export const createPost = async (postData:IPost): Promise<any> => {
 
 // ------------ update product --------------
 export const updatePost = async (
-  postData: IPost,
+  postData: Ipost,
   productId: string
 ): Promise<any> => {
   try {
@@ -91,7 +85,7 @@ export const updatePost = async (
   }
 };
 // ------------add comment----------
-export const addcomment = async (commentData:IComment): Promise<any> => {
+export const addcomment = async (commentData:IpostComment): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
       method: "POST",
@@ -99,8 +93,6 @@ export const addcomment = async (commentData:IComment): Promise<any> => {
       headers: {
         "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
-       
-
       },
     });
     revalidateTag("COMMENT");
@@ -124,6 +116,7 @@ export const getComment = async () => {
   }
 };
 // ------------add rating----------
+export const addrating = async (commentData: IRating): Promise<any> => {
 export const addrating = async (commentData:IRating): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {
@@ -132,8 +125,6 @@ export const addrating = async (commentData:IRating): Promise<any> => {
       headers: {
         "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
-       
-
       },
     });
     revalidateTag("RATING");
@@ -151,8 +142,6 @@ export const addvote = async (voteData:IVote): Promise<any> => {
       headers: {
         "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
-       
-
       },
     });
     revalidateTag("VOTE");

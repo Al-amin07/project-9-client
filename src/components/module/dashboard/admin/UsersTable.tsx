@@ -22,14 +22,15 @@ import { toast } from "sonner"
 import { deleteUserStatus, updateUserStatus } from "@/services/dashboard/admin"
 interface UsersTableProps {
     data: IUser[]
-    meta: {
+    meta?: {
         page: number
         limit: number
         total: number
         totalPage: number
-    }
+    },
+    isPaginate?: boolean
 }
-export function UsersTable({ data, meta }: UsersTableProps) {
+export function UsersTable({ data, meta, isPaginate = true }: UsersTableProps) {
     const [currentPage, setCurrentPage] = useState(1)
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -72,15 +73,20 @@ export function UsersTable({ data, meta }: UsersTableProps) {
 
     // Handle pagination
     const goToNextPage = () => {
-        if (currentPage < meta?.totalPage) {
-            setCurrentPage(currentPage + 1)
+        if (Object.keys(meta!).length > 0) {
+            if (currentPage < meta!.totalPage) {
+                setCurrentPage(currentPage + 1)
+            }
         }
     }
 
     const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
+        if (Object.keys(meta!).length > 0) {
+            if (currentPage > 1) {
+                setCurrentPage(currentPage - 1)
+            }
         }
+
     }
 
     // Get status badge variant
@@ -110,9 +116,11 @@ export function UsersTable({ data, meta }: UsersTableProps) {
     }
 
     useEffect(() => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("page", String(currentPage));
-        router.push(`?${params.toString()}`);
+        if (Object.keys(meta!).length > 0 && isPaginate) {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("page", String(currentPage));
+            router.push(`?${params.toString()}`);
+        }
     }, [currentPage])
 
     return (
@@ -180,24 +188,26 @@ export function UsersTable({ data, meta }: UsersTableProps) {
                 </Table>
             </div>
 
-            <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">
-                    Showing {data?.length} of {meta?.total} users
-                </div>
-                <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm" onClick={goToPreviousPage} className=" cursor-pointer disabled:cursor-not-allowed" disabled={currentPage === 1}>
-                        <ChevronLeft className="h-4 w-4" />
-                        <span className="sr-only">Previous page</span>
-                    </Button>
-                    <div className="text-sm font-medium">
-                        Page {currentPage} of {meta?.totalPage}
+            {
+                isPaginate && Object.keys(meta!).length > 0 && <div className="flex items-center justify-between">
+                    <div className="text-sm text-muted-foreground">
+                        Showing {data?.length} of {meta?.total} users
                     </div>
-                    <Button variant="outline" size="sm" className="cursor-pointer disabled:cursor-not-allowed" onClick={goToNextPage} disabled={currentPage === meta?.totalPage}>
-                        <ChevronRight className="h-4 w-4" />
-                        <span className="sr-only">Next page</span>
-                    </Button>
+                    <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" onClick={goToPreviousPage} className=" cursor-pointer disabled:cursor-not-allowed" disabled={currentPage === 1}>
+                            <ChevronLeft className="h-4 w-4" />
+                            <span className="sr-only">Previous page</span>
+                        </Button>
+                        <div className="text-sm font-medium">
+                            Page {currentPage} of {meta?.totalPage}
+                        </div>
+                        <Button variant="outline" size="sm" className="cursor-pointer disabled:cursor-not-allowed" onClick={goToNextPage} disabled={currentPage === meta?.totalPage}>
+                            <ChevronRight className="h-4 w-4" />
+                            <span className="sr-only">Next page</span>
+                        </Button>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }

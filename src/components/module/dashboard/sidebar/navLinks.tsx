@@ -1,10 +1,10 @@
 import { ILink } from "@/types/link.type";
-import { SquareTerminal, Users } from "lucide-react";
+import { LucideAlbum, LucidePanelRightInactive, SquareTerminal, UserRoundPenIcon, Users } from "lucide-react";
 
 export const adminLinks: ILink[] = [
     {
         title: "Dashboard",
-        href: "/dashboard",
+        href: "/admin/dashboard",
         icon: SquareTerminal,
     },
     {
@@ -15,12 +15,17 @@ export const adminLinks: ILink[] = [
     {
         title: "Posts",
         href: "/admin/posts",
-        icon: Users,
+        icon: LucidePanelRightInactive,
     },
     {
         title: "Categories",
         href: "/admin/categories",
-        icon: Users,
+        icon: LucideAlbum,
+    },
+    {
+        title: "My Profile",
+        href: "/profile",
+        icon: UserRoundPenIcon,
     },
     {
         title: "Comments",
@@ -45,6 +50,11 @@ export const userLinks = [
         title: "My Posts",
         href: "/user/posts",
         icon: Users,
-    }
+    },
+    {
+        title: "My Profile",
+        href: "/profile",
+        icon: UserRoundPenIcon,
+    },
 ];
 

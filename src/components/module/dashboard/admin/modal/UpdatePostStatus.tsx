@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-
     DialogContent,
 
     DialogHeader,
@@ -11,28 +10,33 @@ import {
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { IUser } from "@/types";
+import { Textarea } from "@/components/ui/textarea";
+import { IPost } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 const formSchema = z.object({
-    status: z.enum(["ACTIVE", "BLOCKED", "DELETED"], {
+    status: z.enum(["PENDING", "APPROVED", "REJECTED"], {
         required_error: "Please select a status.",
     }),
+    reasons: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
-export function UserUpdateModal({ user, onSubmit }: { user: IUser, onSubmit: (id: string, status: FormValues) => Promise<void> }) {
+export function PostUpdateModal({ post, onSubmit }: { post: IPost, onSubmit: (id: string, status: FormValues) => Promise<void> }) {
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            status: user?.status
+            status: post?.status,
+            reasons: post?.reasons || ""
         },
     });
-
+    const { formState: { isSubmitting } } = form
     const handleSubmit = (data: FormValues) => {
-        onSubmit(user?.id, data);
+        onSubmit(post?.id, data);
     };
+    console.log({ isSubmitting })
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -40,8 +44,9 @@ export function UserUpdateModal({ user, onSubmit }: { user: IUser, onSubmit: (id
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle className="mb-3">Update user status</DialogTitle>
-                    <Form {...form}>
+                    <DialogTitle className="mb-3">Update Post status</DialogTitle>
+
+                    <Form {...form} >
                         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 w-full">
                             <FormField
                                 control={form.control}
@@ -58,17 +63,41 @@ export function UserUpdateModal({ user, onSubmit }: { user: IUser, onSubmit: (id
                                             <SelectContent className="">
                                                 <SelectItem
 
-                                                    value="ACTIVE">Active</SelectItem>
-                                                <SelectItem value="BLOCKED">Blocked</SelectItem>
-                                                <SelectItem value="DELETED">Deleted</SelectItem>
+                                                    value="APPROVED">Approved</SelectItem>
+                                                <SelectItem value="REJECTED">Rejected</SelectItem>
+                                                <SelectItem value="PENDING">Pending</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
+                            <FormField
+                                control={form.control}
+                                name="reasons"
 
-                            <Button variant={"outline"} type="submit">Update Status</Button>
+                                render={({ }) => (
+                                    <FormItem >
+                                        <FormLabel>Reasons</FormLabel>
+                                        <FormControl>
+
+                                            <Textarea
+
+                                                rows={4}
+                                                placeholder="Tell us a little bit about yourself"
+                                                className=""
+
+                                            />
+                                        </FormControl>
+
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <Button variant={"outline"} type="submit">{isSubmitting ? "Updating..." : " Update Status"}
+
+                            </Button>
 
 
 

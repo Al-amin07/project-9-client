@@ -1,43 +1,30 @@
-"use client"
 
+
+import { CategoryTable } from '@/components/module/dashboard/admin/CategoryTable';
+import { PostsTable } from '@/components/module/dashboard/admin/PostTable';
+import { UsersTable } from '@/components/module/dashboard/admin/UsersTable';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCredentials } from '@/services/dashboard/admin';
 import { IPost, IUser } from '@/types';
 import { ICategory } from '@/types/category.type';
 import Link from 'next/link';
+interface DashboardData {
+    totalUsers: number;
+    totalPosts: number;
+    totalComments: number;
+    totalVotes: number;
+    totalRatings: number;
+    totalCategories: number;
+    posts: IPost[] | undefined,
+    categories: ICategory[] | undefined,
+    users: IUser[] | undefined
+}
+export default async function AdminDashboard() {
 
-import React, { useEffect, useState } from 'react'
-import { UsersTable } from './UsersTable';
-import { PostsTable } from './PostTable';
-import { CategoryTable } from './CategoryTable';
 
-export default function AdminDashboard() {
-    interface DashboardData {
-        totalUsers: number;
-        totalPosts: number;
-        totalComments: number;
-        totalVotes: number;
-        totalRatings: number;
-        totalCategories: number;
-        posts: IPost[] | undefined,
-        categories: ICategory[] | undefined,
-        users: IUser[] | undefined
-    }
-
-    const [data, setData] = useState<DashboardData | null>(null);
     const url = `${process.env.NEXT_PUBLIC_API}/admin/dashboard`;
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getCredentials(url);
-                setData(data?.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchData()
-    }, [url])
+    const { data } = await getCredentials(url) as { data: DashboardData }
     return (
         <div className="p-6 space-y-6">
             <h1 className='text-2xl font-semibold'>Welcome to Admin Dashboard</h1>

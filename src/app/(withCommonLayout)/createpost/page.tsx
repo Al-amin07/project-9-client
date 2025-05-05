@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import { useAuth } from "@/provider/UserProvider"
@@ -5,9 +7,13 @@ import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
 import { uploadToCloudinary } from "@/components/utils/uploadToCloudinary"
 import { createPost } from "@/services/posts"
-import { IPost } from "../../../types/post.type"
+import { Ipost } from "../../../types/post.type"
 import { getAllCategory } from "@/services/category"
 import { toast } from "sonner"
+import { IPost } from "@/types"
+import { ICategory } from "@/types/category.type"
+import { useRouter } from "next/navigation"
+
 
 interface FormData {
   title: string
@@ -23,7 +29,6 @@ const Createpost = () => {
   const { user } = useAuth()!
   const [loading, setLoading] = useState(false)
   const [categories, setCategories] = useState([])
-  const [imageFiles, setImageFiles] = useState<File[]>([])
 
   const {
     register,
@@ -51,8 +56,8 @@ const Createpost = () => {
         } else {
           toast.error("Invalid category response")
         }
-      } catch (err) {
-        toast.error("Failed to fetch categories")
+      } catch (err: any) {
+        toast.error("Failed to fetch categories", err)
       }
     }
     fetchCategories()
@@ -74,13 +79,13 @@ const Createpost = () => {
       const files = imageFiles
       const uploadPromises = files.map((file) => uploadToCloudinary(file))
       const imageUrls = (await Promise.all(uploadPromises)).filter(Boolean) as string[]
-
+      console.log({ imageUrls })
       if (!imageUrls.length) {
         toast.error("Image upload failed.")
         return
       }
 
-      const postData: IPost = {
+      const postData: Ipost = {
         title: data.title,
         description: data.description,
         location: data.location,
@@ -88,12 +93,13 @@ const Createpost = () => {
         price: data.price || 0,
         image: imageUrls[0],
         categoryId: data.categoryId,
-        userId: user?.id || "",
+        userId: user?.id || ""
       }
 
       const result = await createPost(postData)
+      console.log({ result })
       if (result?.success) {
-        toast.success("Post created successfully!")
+
         reset()
         setImageFiles([])
       } else {

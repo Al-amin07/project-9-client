@@ -17,6 +17,7 @@ import { adminLinks, userLinks } from "./navLinks"
 import { IUser } from "@/types"
 import { UserCircle } from "lucide-react"
 import Link from "next/link"
+import { PuffLoader } from "react-spinners"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { user, logOut, isLoading } = useAuth()!
@@ -29,7 +30,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarHeader>
                     <div className="">
 
-                        <Link href={'/'} className={`text-2xl block mx-auto text-center w-full font-semibold text-primary py-4 hover:scale-110 transition-all duration-400 ${!open ? "opacity-0" : ""} transition-all duration-1000`}>MealBox</Link>
+                        <Link href={'/'} className={`text-2xl block mx-auto text-center w-full font-semibold text-primary py-4 hover:scale-110 transition-all duration-400 ${!open ? "opacity-0" : ""} transition-all duration-1000`}>RateMyBite  </Link>
                         <div className="flex flex-col gap-5
                      p-2 border-y border-gray-200 bg-white">
 
@@ -50,7 +51,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
                 </SidebarHeader>
                 {
-                    !user && isLoading ? <p>Loading....</p> : <SidebarContent>
+                    !user && isLoading ? <div className="h-full flex items-center justify-center">
+                        <PuffLoader
+                            color="#FF3C48"
+                            size={40}
+                            speedMultiplier={1}
+                        />
+
+                    </div> : <SidebarContent>
                         <NavMain items={user?.role === "ADMIN" ? adminLinks : userLinks} />
 
                     </SidebarContent>
