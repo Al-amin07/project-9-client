@@ -6,7 +6,8 @@ import { useAuth } from "@/provider/UserProvider";
 import { IPost } from "@/types";
 import Image from "next/image";
 import { ICategory } from "@/types/category.type";
-import EditPostModal from "@/components/postModal/postmodal";
+import EditPostModal from "@/components/postModal/Postmodal";
+// import EditPostModal from "@/components/postModal/postmodal";
 
 const UserPostsPage = () => {
   const { user, isLoading } = useAuth() ?? {};
