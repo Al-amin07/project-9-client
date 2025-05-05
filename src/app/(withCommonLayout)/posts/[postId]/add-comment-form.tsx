@@ -40,14 +40,14 @@ export default function AddCommentForm({ postId }: { postId: string }) {
   }
 
   return (
-    <div className="space-y-2 mt-6">
+    <div className=" w-70 gap-2">
       <h3 className="text-lg font-semibold">Add a Comment</h3>
       <Textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Your comment..."
       />
-      <Button onClick={handleSubmit} disabled={!text.trim() || loading}>
+      <Button className="mt-2" onClick={handleSubmit} disabled={!text.trim() || loading}>
         {loading ? "Submitting..." : "Submit Comment"}
       </Button>
     </div>

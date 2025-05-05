@@ -40,7 +40,7 @@ export default function AddRatingForm({ postId }: { postId: string }) {
   }
 
   return (
-    <div className="mt-6">
+    <div className="">
       <h3 className="text-lg font-semibold mb-2">Rate this post</h3>
       <div className="flex items-center gap-1 mb-2">
         {[1, 2, 3, 4, 5].map((star) => (

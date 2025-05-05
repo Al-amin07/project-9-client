@@ -22,6 +22,11 @@ export const adminLinks: ILink[] = [
         href: "/admin/categories",
         icon: Users,
     },
+    {
+        title: "Comments",
+        href: "/user/comments",
+        icon: Users,
+    },
 
 
 ];

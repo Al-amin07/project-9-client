@@ -1,8 +1,12 @@
 
 "use server";
-import { Ipost, IpostComment, IpostVote, Irating } from "@/types";
+
+import { IPost } from "@/types";
+import { IComment } from "@/types/comment.type";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { IRating } from '../../types/rating.type';
+import { IVote } from "@/types/vote.type";
 
 // get all products
 // lib/api.ts
@@ -44,8 +48,8 @@ export const getSinglePost = async (postId: string) => {
   }
 };
 
-// add product
-export const createPost = async (postData:Ipost): Promise<any> => {
+// ------------ add product -----------
+export const createPost = async (postData:IPost): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post`, {
       method: "POST",
@@ -64,9 +68,9 @@ export const createPost = async (postData:Ipost): Promise<any> => {
   }
 };
 
-// update product
+// ------------ update product --------------
 export const updatePost = async (
-  postData: Ipost,
+  postData: IPost,
   productId: string
 ): Promise<any> => {
   try {
@@ -87,7 +91,7 @@ export const updatePost = async (
   }
 };
 // ------------add comment----------
-export const addcomment = async (commentData:IpostComment): Promise<any> => {
+export const addcomment = async (commentData:IComment): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
       method: "POST",
@@ -105,8 +109,22 @@ export const addcomment = async (commentData:IpostComment): Promise<any> => {
     return Error(error);
   }
 };
+
+// ------------get all comments----------
+
+export const getComment = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
+      cache: "no-store", 
+    });
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
 // ------------add rating----------
-export const addrating = async (commentData:Irating): Promise<any> => {
+export const addrating = async (commentData:IRating): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {
       method: "POST",
@@ -125,7 +143,7 @@ export const addrating = async (commentData:Irating): Promise<any> => {
   }
 };
 // ------------add vOTE----------
-export const addvote = async (voteData:IpostVote): Promise<any> => {
+export const addvote = async (voteData:IVote): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/vote`, {
       method: "POST",

@@ -18,3 +18,14 @@ export interface IPost {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CreatePostInput {
+  title: string
+  description: string
+  location: string
+  priceRange: string
+  price: number
+  image: string
+  categoryId: string
+  userId: string
+}

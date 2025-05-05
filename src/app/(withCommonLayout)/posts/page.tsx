@@ -109,7 +109,7 @@ export default function PostsPage() {
       {/* Layout */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Filters */}
-        <aside className="w-full lg:w-1/4 border p-4 rounded-md shadow-sm bg-white">
+        <aside className="w-full lg:w-1/4 border p-4 rounded-md shadow-sm">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
 
           <div className="mb-4">
@@ -220,7 +220,7 @@ export default function PostsPage() {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`px-3 py-1 rounded border text-sm ${currentPage === i + 1 ? "bg-blue-600 text-white" : "hover:bg-gray-100"
+                className={`px-3 py-1 rounded border text-sm ${currentPage === i + 1 ? "bg-red-600 text-white" : "hover:bg-gray-100"
                   }`}
               >
                 {i + 1}

@@ -5,7 +5,7 @@ import { getSinglePost } from "@/services/posts"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { PostStatusBadge } from "./post-status-badge"
+
 import { ThumbsUp, ThumbsDown, Star } from "lucide-react"
 import AddCommentForm from "./add-comment-form"
 import AddVoteForm from "./add-vote-form"
@@ -15,7 +15,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
   const res = await getSinglePost(params.postId)
-  if (!res || res instanceof Error) return notFound()
+  if (!res?.data) {
+    notFound()
+  }
   const post = res.data
 
   const upvotes = post.votes?.filter((v: any) => v.status === "UPVOTE").length || 0
@@ -34,7 +36,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
             className="object-cover"
           />
           <div className="absolute top-4 right-4 flex gap-2">
-            <PostStatusBadge status={post.status} />
+            {/* <PostStatusBadge status={post.status} /> */}
             {post.isPremium && (
               <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
                 Premium
@@ -77,7 +79,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
           <Separator />
 
           {/* Add Comment/Rating/Vote Forms */}
-         <div className="flex  justify-between items-center gap-4 mt-4">
+         <div className="flex flex-wrap justify-around items-center gap-6 mt-4">
          <AddCommentForm postId={post.id} />
          <AddVoteForm postId={post.id} />
          <AddRatingForm postId={post.id} />
@@ -99,18 +101,18 @@ export default async function PostPage({ params }: { params: { postId: string } 
       {post.comments.map((comment: any, idx: number) => (
         <li
           key={comment.id}
-          className="flex items-start gap-4 bg-muted p-4 rounded-lg shadow-sm border"
+          className="flex items-start gap-4  p-4 rounded-lg shadow-sm border"
         >
           {/* Avatar - use fallback if not available */}
           <Avatar className="h-10 w-10">
             <AvatarImage src="/placeholder.svg" alt="user" />
-            <AvatarFallback className="bg-red-500">U</AvatarFallback>
+            <AvatarFallback className="bg-red-400">U</AvatarFallback>
           </Avatar>
 
           {/* Comment Body */}
           <div className="flex-1">
-            <div className="text-sm text-muted-foreground">{comment.text}</div>
-            <p className="text-xs text-gray-500 mt-1">
+            <div className="text-lg ">{comment.text}</div>
+            <p className="text-xs  mt-1">
               Posted on{" "}
               {new Date(comment.createdAt).toLocaleDateString("en-US", {
                 month: "short",

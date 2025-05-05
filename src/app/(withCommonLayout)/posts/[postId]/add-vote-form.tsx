@@ -38,8 +38,10 @@ export default function AddVoteForm({ postId }: { postId: string }) {
   }
 
   return (
-    <div className="flex gap-2 mt-6">
-      <Button
+    <div className="gap-2">
+      <h3 className="text-lg font-semibold">Like or DisLike</h3>
+     <div className="flex items-center gap-2">
+     <Button
         variant="outline"
         disabled={loading}
         onClick={() => handleVote("UPVOTE")}
@@ -53,6 +55,7 @@ export default function AddVoteForm({ postId }: { postId: string }) {
       >
         <ThumbsDown className="w-4 h-4 mr-1" /> Downvote
       </Button>
+     </div>
     </div>
   )
 }

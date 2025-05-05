@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
 import { uploadToCloudinary } from "@/components/utils/uploadToCloudinary"
 import { createPost } from "@/services/posts"
-import { Ipost } from "../../../types/post.type"
+import { IPost } from "../../../types/post.type"
 import { getAllCategory } from "@/services/category"
 import { toast } from "sonner"
 
@@ -23,7 +23,7 @@ const Createpost = () => {
   const { user } = useAuth()!
   const [loading, setLoading] = useState(false)
   const [categories, setCategories] = useState([])
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [imageFiles, setImageFiles] = useState<File[]>([])
 
   const {
     register,
@@ -37,8 +37,8 @@ const Createpost = () => {
 
   useEffect(() => {
     if (watchedImage?.length) {
-      const file = watchedImage[0]
-      setImagePreview(URL.createObjectURL(file))
+      const filesArray = Array.from(watchedImage)
+      setImageFiles(filesArray)
     }
   }, [watchedImage])
 
@@ -58,10 +58,20 @@ const Createpost = () => {
     fetchCategories()
   }, [])
 
+  const handleRemoveImage = (index: number) => {
+    setImageFiles((prev) => prev.filter((_, i) => i !== index))
+  }
+
+  const handleImageChange = (files: FileList | null) => {
+    if (!files) return
+    const fileArray = Array.from(files)
+    setImageFiles(fileArray)
+  }
+
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     try {
-      const files = Array.from(data.image)
+      const files = imageFiles
       const uploadPromises = files.map((file) => uploadToCloudinary(file))
       const imageUrls = (await Promise.all(uploadPromises)).filter(Boolean) as string[]
 
@@ -70,7 +80,7 @@ const Createpost = () => {
         return
       }
 
-      const postData: Ipost = {
+      const postData: IPost = {
         title: data.title,
         description: data.description,
         location: data.location,
@@ -83,14 +93,14 @@ const Createpost = () => {
 
       const result = await createPost(postData)
       if (result?.success) {
-        toast.success("✅ Post created successfully!")
+        toast.success("Post created successfully!")
         reset()
-        setImagePreview(null)
+        setImageFiles([])
       } else {
-        toast.error("❌ Failed to create post")
+        toast.error("Failed to create post")
       }
     } catch (err) {
-      toast.error("❌ Post creation failed")
+      toast.error("Post creation failed")
     } finally {
       setLoading(false)
     }
@@ -101,7 +111,6 @@ const Createpost = () => {
       <h1 className="text-2xl text-center font-bold text-gray-800 mb-6">Create New Post</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* Title */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
           <input
@@ -113,7 +122,6 @@ const Createpost = () => {
           />
         </div>
 
-        {/* Description */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
           <textarea
@@ -125,7 +133,6 @@ const Createpost = () => {
           />
         </div>
 
-        {/* Location & Price */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
@@ -149,58 +156,72 @@ const Createpost = () => {
           </div>
         </div>
 
-        {/* Price Range */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
-          <select
-            {...register("priceRange")}
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#FF6168]"
-            required
-          >
-            <option value="">Select Range</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <select
+              {...register("categoryId")}
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#FF6168]"
+              required
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat: any) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+            <select
+              {...register("priceRange")}
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#FF6168]"
+              required
+            >
+              <option value="">Select Range</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
         </div>
 
-        {/* Category */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-          <select
-            {...register("categoryId")}
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#FF6168]"
-            required
-          >
-            <option value="">Select Category</option>
-            {categories.map((cat: any) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Upload Image */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
-          <input
-            {...register("image")}
-            type="file"
-            accept="image/*"
-            className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-[#FF6168]/10 file:text-[#FF6168] hover:file:bg-[#FF6168]/20"
-            required
-          />
-          {imagePreview && (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="mt-3 rounded-md w-full h-60 object-cover border"
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-600">Images</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) => handleImageChange(e.target.files)}
+              className="w-full px-3 py-2 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             />
-          )}
+            {imageFiles.length === 0 && (
+              <p className="text-red-500 text-sm">At least one image is required</p>
+            )}
+            <div className="flex flex-wrap gap-4">
+              {imageFiles.map((file, index) => (
+                <div key={index} className="relative group w-28 h-28">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt="Preview"
+                    className="w-full h-full object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hover:bg-red-600 transition-colors"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Submit Button */}
         <div className="pt-4">
           <button
             type="submit"
