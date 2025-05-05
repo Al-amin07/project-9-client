@@ -133,6 +133,23 @@ export const addrating = async (commentData:IRating): Promise<any> => {
     return Error(error);
   }
 };
+// ----------get rating-------
+export const getRating = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {
+      cache: "no-store", 
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: (await cookies()).get("accessToken")?.value as string,
+    },
+  });
+  const data = await res.json();
+  return data;
+} catch (error: any) {
+  return Error(error);
+}
+};
 // ------------add vOTE----------
 export const addvote = async (voteData:IVote): Promise<any> => {
   try {

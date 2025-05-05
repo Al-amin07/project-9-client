@@ -13,6 +13,7 @@ export interface IUser {
   status: "ACTIVE" | "BLOCKED" | "DELETED";
   isDeleted: boolean;
   isPremium: boolean;
+  premiumUntil?: string;
   comments: IComment[];
   posts: IPost[];
   ratings: IRating[];

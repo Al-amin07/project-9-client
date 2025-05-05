@@ -53,8 +53,8 @@ const Navbar = () => {
               key={item.href}
               href={item.href}
               className={`text-base font-semibold transition-colors ${pathname === item.href
-                  ? "text-primary"
-                  : "text-gray-800 dark:text-white hover:text-primary"
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
                 }`}
             >
               {item.label}
@@ -90,7 +90,7 @@ const Navbar = () => {
                   {user.fullName || "My Account"}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href="/dashboard">
+                <Link href={user?.role === 'ADMIN' ? "/admin/dashboard" : "/user/dashboard"}>
                   <DropdownMenuItem className="cursor-pointer">
                     Dashboard
                     <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
@@ -142,8 +142,8 @@ const Navbar = () => {
               key={item.href}
               href={item.href}
               className={`block font-semibold text-md ${pathname === item.href
-                  ? "text-primary"
-                  : "text-gray-800 dark:text-white hover:text-primary"
+                ? "text-primary"
+                : "text-gray-800 dark:text-white hover:text-primary"
                 }`}
             >
               {item.label}

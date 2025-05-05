@@ -34,7 +34,7 @@ export const adminLinks: ILink[] = [
 export const userLinks = [
     {
         title: "Dashboard",
-        href: "/dashboard",
+        href: "/user/dashboard",
         icon: SquareTerminal,
     },
     {
@@ -50,6 +50,11 @@ export const userLinks = [
     {
         title: "My Profile",
         href: "/profile",
+        icon: UserRoundPenIcon,
+    },
+    {
+        title: "My Ratings",
+        href: "/rating",
         icon: UserRoundPenIcon,
     },
 ];
