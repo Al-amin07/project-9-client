@@ -1,4 +1,5 @@
 import AboutBanner from "@/components/about/aboutBanner";
+import { FAQSection } from "@/components/faqSection/faq";
 
 export default function AboutPage() {
   return (
@@ -49,7 +50,7 @@ export default function AboutPage() {
           </div>
 
      
-
+<FAQSection></FAQSection>
       </div>
     </>
   );

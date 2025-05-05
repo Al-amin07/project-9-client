@@ -1,14 +1,23 @@
+import { IComment } from "./comment.type";
+import { IPost } from "./post.type";
+import { IRating } from "./rating.type";
+import { IVote } from "./vote.type";
+
 export interface IUser {
-  _id: string;
+  id: string;
+  fullName: string;
   email: string;
-  phone: string;
-  password: string;
-  name: string;
   photo?: string;
-  role: "customer" | "provider";
-  isActive: boolean;
-  address?: string;
-  cuisineSpecialties?: string[];
-  iat: number;
-  exp: number;
+  password: string;
+  role: "USER" | "ADMIN" | "PREMIUM";
+  status: "ACTIVE" | "BLOCKED" | "DELETED";
+  isDeleted: boolean;
+  isPremium: boolean;
+  premiumUntil?: string;
+  comments: IComment[];
+  posts: IPost[];
+  ratings: IRating[];
+  votes: IVote[];
+  createdAt: string;
+  updatedAt: string;
 }

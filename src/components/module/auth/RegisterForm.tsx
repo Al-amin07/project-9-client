@@ -23,9 +23,10 @@ import { EyeIcon, EyeOff } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { registerUser } from '@/services/auth';
+import { getCurrentUser, registerUser } from '@/services/auth';
 import { useRouter } from 'next/navigation';
 import { registrationSchema } from './schema';
+import { IUser } from '@/types';
 const RegistrationForm = () => {
     interface RegisterFormValues {
         fullName: string;
@@ -38,7 +39,7 @@ const RegistrationForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
 
-    const { setIsLoading } = useAuth()!
+    const { setUser } = useAuth()!
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -49,7 +50,9 @@ const RegistrationForm = () => {
             console.log({ result });
             if (result?.success) {
                 toast.success(result?.message || "Registration successful")
-                setIsLoading(true)
+                const user = await getCurrentUser() as IUser;
+                setUser(user);
+                // setIsLoading(true)
                 router.push('/')
             } else {
                 toast.error(result?.message || "Registration failed")

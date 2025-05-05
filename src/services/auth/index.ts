@@ -33,11 +33,26 @@ export const loginUser = async (userData: FieldValues) => {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    console.log({ data });
     if (data?.success) {
       (await cookies()).set("accessToken", data?.data?.accessToken);
       (await cookies()).set("refreshToken", data?.data?.refreshToken);
     }
+    return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+export const getMe = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/get-me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")?.value as string,
+      },
+    });
+    const data = await res.json();
     return data;
   } catch (error: any) {
     return Error(error);
@@ -52,6 +67,7 @@ export const logOutUser = async () => {
 export const getCurrentUser = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value as string;
   let decoded = null;
+  console.log({ accessToken });
   if (accessToken) {
     decoded = jwtDecode(accessToken);
   }

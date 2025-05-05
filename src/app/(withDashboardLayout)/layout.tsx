@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         <DashboardNavbar />
                     </div>
                 </header>
-                <div className="  p-4 pt-0">
+                <div className="  p-8 pt-0">
 
                     {children}
 

@@ -14,7 +14,7 @@ export default function Banner() {
   }, []);
 
   return (
-    <section className="w-full  bg-secondary py-18 px-6 my-12 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <section className="w-full rounded-2xl  bg-secondary py-18 px-6 my-12 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div
         className={`space-y-6 transition-all duration-700 ease-out ${
           animate ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
@@ -27,7 +27,8 @@ export default function Banner() {
           Experience mouth-watering meals made with love and delivered fresh to
           your doorstep. Order now and enjoy exclusive deals!
         </p>
-        <Button className="bg-[#FF3C48]  hover:bg-[#ff3c49ec]  text-white px-6 py-3 rounded-2xl shadow-md text-lg cursor-pointer">
+
+        <Button className="p-5 cursor-pointer bg-white rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 flex  text-lg items-center gap-2">
           Order Now <FaCartArrowDown />
         </Button>
       </div>

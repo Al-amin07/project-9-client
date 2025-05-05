@@ -1,136 +1,40 @@
+// app/posts/[postId]/page.tsx
 import { notFound } from "next/navigation"
 import Image from "next/image"
-
+import { getSinglePost } from "@/services/posts"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-// import CommentSection from "./comment-section"
-import RatingSection from "./rating-section"
-import VoteSection from "./vote-section"
-import PriceTag from "./price-tag"
-import PostStatusBadge from "./post-status-badge"
-import { PostStatus } from "@/types"
-
-async function getPost(id: string) {
-  const data = [
-    {
-      id: "1",
-      title: "Modern Apartment in Downtown",
-      description: "Beautiful apartment with amazing city views and modern amenities.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "New York, NY",
-      price: 1200,
-      priceRange: "High",
-      isPremium: true,
-      status: "APPROVED",
-      category: { name: "Real Estate" },
-      createdAt: new Date("2023-08-01"),
-    },
-    {
-      id: "2",
-      title: "Professional DSLR Camera",
-      description: "Slightly used professional camera with multiple lenses included.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "Los Angeles, CA",
-      price: 899,
-      priceRange: "Medium",
-      isPremium: false,
-      status: "APPROVED",
-      category: { name: "Electronics" },
-      createdAt: new Date("2023-08-01"),
-    },
-    {
-      id: "3",
-      title: "Vintage Vinyl Collection",
-      description: "Collection of 200+ vinyl records from the 60s and 70s in excellent condition.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "Chicago, IL",
-      price: 450,
-      priceRange: "Medium",
-      isPremium: false,
-      status: "PENDING",
-      category: { name: "Collectibles" },
-      createdAt: new Date("2023-08-01"),
-    },
-    {
-      id: "4",
-      title: "Mountain Bike - Premium Model",
-      description: "High-end mountain bike, perfect for trails and rough terrain.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "Denver, CO",
-      price: 1500,
-      priceRange: "High",
-      isPremium: true,
-      status: "APPROVED",
-      category: { name: "Sports" },
-      createdAt: new Date("2023-08-01"),
-    },
-    {
-      id: "5",
-      title: "Handcrafted Wooden Furniture",
-      description: "Beautiful handmade wooden dining table with four matching chairs.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "Portland, OR",
-      price: 750,
-      priceRange: "Medium",
-      isPremium: false,
-      status: "APPROVED",
-      category: { name: "Furniture" },
-      createdAt: new Date("2023-08-01"),
-    },
-    {
-      id: "6",
-      title: "Graphic Design Services",
-      description: "Professional graphic design services for logos, branding, and marketing materials.",
-      image: "/placeholder.svg?height=300&width=400",
-      location: "Remote",
-      price: 299,
-      priceRange: "Low",
-      isPremium: false,
-      status: "APPROVED",
-      category: { name: "Services" },
-      createdAt: new Date("2023-08-01"),
-    },
-  ]
-  return data.find((post) => post.id === id)
-}
-
-
-async function getPostData(id: string) {
-  const post = await getPost(id)
-  return post
-}
+import { PostStatusBadge } from "./post-status-badge"
+import { ThumbsUp, ThumbsDown, Star } from "lucide-react"
+import AddCommentForm from "./add-comment-form"
+import AddVoteForm from "./add-vote-form"
+import AddRatingForm from "./add-rating-form"
+import { MessageSquare } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
-  const post = await getPostData(params?.postId)
+  const res = await getSinglePost(params.postId)
+  if (!res || res instanceof Error) return notFound()
+  const post = res.data
 
-  if (!post) {
-    notFound()
-  }
-
-  // Calculate average rating
-  // const averageRating = post?.ratings.length
-  //   ? post?.ratings.reduce((acc, rating) => acc + rating.value, 0) / post.ratings.length
-  //   : 0
-
-  // Calculate votes
-  // const upvotes = post.votes.filter((vote) => vote.status === "UPVOTE").length
-  // const downvotes = post.votes.filter((vote) => vote.status === "DOWNVOTE").length
+  const upvotes = post.votes?.filter((v: any) => v.status === "UPVOTE").length || 0
+  const downvotes = post.votes?.filter((v: any) => v.status === "DOWNVOTE").length || 0
+  const averageRating =
+    post.ratings?.reduce((acc: number, r: any) => acc + r.value, 0) / post.ratings.length || 0
 
   return (
-    <div className="container max-w-4xl py-8">
-      <Card className="overflow-hidden">
+    <div className="container py-8">
+      <Card>
         <div className="relative h-[300px] sm:h-[400px]">
           <Image
-            src={post.image || "/placeholder.svg?height=400&width=800"}
+            src={post.image || "/placeholder.svg"}
             alt={post.title}
             fill
             className="object-cover"
-            priority
           />
           <div className="absolute top-4 right-4 flex gap-2">
-            <PostStatusBadge status={post.status as PostStatus} />
+            <PostStatusBadge status={post.status} />
             {post.isPremium && (
               <Badge variant="secondary" className="bg-amber-500 text-white hover:bg-amber-600">
                 Premium
@@ -139,51 +43,92 @@ export default async function PostPage({ params }: { params: { postId: string } 
           </div>
         </div>
 
-        <CardHeader className="flex flex-row items-start justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="outline">{post.category.name}</Badge>
-              <Badge variant="secondary">{post.priceRange}</Badge>
-            </div>
-            <h1 className="text-2xl font-bold">{post.title}</h1>
-            <p className="text-muted-foreground">{post.location}</p>
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-2">
+            <Badge variant="outline">{post.category?.name}</Badge>
+            <Badge variant="secondary">{post.priceRange}</Badge>
           </div>
-          <PriceTag price={post.price} isPremium={post.isPremium} />
+          <h1 className="text-2xl font-bold">{post.title}</h1>
+          <p className="text-muted-foreground">{post.location}</p>
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <div className="flex items-center gap-3">
-            <Avatar>
-              <AvatarImage src="/placeholder.svg?height=40&width=40" alt={"alamin"} />
-              <AvatarFallback>
-                Alamin
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="font-medium">{'alsujon2001@gmail.com'}</p>
-              <p className="text-sm text-muted-foreground">
-                Posted {post.createdAt.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) || 0}
-              </p>
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Description</h2>
+            <p className="whitespace-pre-line text-muted-foreground">{post.description}</p>
+          </div>
+
+          <Separator />
+
+          {/* Voting & Rating Info */}
+          <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex items-center gap-2 text-sm">
+              <ThumbsUp className="w-4 h-4 text-green-600" /> {upvotes} Upvotes
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <ThumbsDown className="w-4 h-4 text-red-600" /> {downvotes} Downvotes
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Star className="w-4 h-4 text-yellow-500" /> {averageRating.toFixed(1)} / 5
             </div>
           </div>
 
+         
           <Separator />
 
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Description</h2>
-            <p className="whitespace-pre-line">{post.description}</p>
-          </div>
+          {/* Add Comment/Rating/Vote Forms */}
+         <div className="flex  justify-between items-center gap-4 mt-4">
+         <AddCommentForm postId={post.id} />
+         <AddVoteForm postId={post.id} />
+         <AddRatingForm postId={post.id} />
+         </div>
+         
+         
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <VoteSection postId={post.id} upvotes={10} downvotes={20} />
-            <RatingSection postId={post.id} averageRating={5} totalRatings={3} />
+          <Separator />
+
+     
+           {/* Display Comments */}
+           {post.comments?.length > 0 && (
+  <div className="mt-8">
+    <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+      <MessageSquare className="w-5 h-5 text-red-500" />
+      All Comments
+    </h2>
+    <ul className="space-y-4">
+      {post.comments.map((comment: any, idx: number) => (
+        <li
+          key={comment.id}
+          className="flex items-start gap-4 bg-muted p-4 rounded-lg shadow-sm border"
+        >
+          {/* Avatar - use fallback if not available */}
+          <Avatar className="h-10 w-10">
+            <AvatarImage src="/placeholder.svg" alt="user" />
+            <AvatarFallback className="bg-red-500">U</AvatarFallback>
+          </Avatar>
+
+          {/* Comment Body */}
+          <div className="flex-1">
+            <div className="text-sm text-muted-foreground">{comment.text}</div>
+            <p className="text-xs text-gray-500 mt-1">
+              Posted on{" "}
+              {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            {idx !== post.comments.length - 1 && <Separator className="mt-3" />}
           </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
         </CardContent>
 
-        <CardFooter className="block p-0">
-          <Separator />
-          {/* <CommentSection postId={post.id} comments={post.comments} /> */}
-        </CardFooter>
+        <CardFooter />
       </Card>
     </div>
   )

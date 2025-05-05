@@ -22,6 +22,7 @@ export default function UserProvider({ children }: { children: React.ReactNode }
         setIsLoading(false);
     }
     useEffect(() => {
+
         handleUser();
     }, [isLoading])
     const logOut = async () => {
@@ -36,7 +37,7 @@ export default function UserProvider({ children }: { children: React.ReactNode }
         setIsLoading,
         logOut
     }
-    // console.log({ user, isLoading })
+    console.log({ user, isLoading })
     return (
         <UserContext.Provider value={authInfo}>
             {children}

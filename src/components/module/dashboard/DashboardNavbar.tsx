@@ -1,6 +1,5 @@
 "use client"
-import Link from "next/link"
-import { Bell, Search, Settings, User } from "lucide-react"
+import { Bell, Search, User } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -21,7 +20,7 @@ export function DashboardNavbar() {
     return (
         <div>
             <div className=" flex 
-                         items-center gap-2">
+                         items-center gap-4">
                 {/* Search */}
                 <div className="hidden sm:flex relative w-40 lg:w-64">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -35,13 +34,7 @@ export function DashboardNavbar() {
                     <span className="sr-only">Notifications</span>
                 </Button>
                 <Theme />
-                {/* Settings */}
-                <Button variant="ghost" size="icon" asChild>
-                    <Link href="/dashboard/settings">
-                        <Settings className="h-5 w-5" />
-                        <span className="sr-only">Settings</span>
-                    </Link>
-                </Button>
+
 
                 {/* User Menu */}
                 <DropdownMenu>

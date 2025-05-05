@@ -1,19 +1,19 @@
 import FoodCategory from "@/components/home/category/FoodCategory";
-import FoodDiscoveries from "@/components/home/discoveies/FoodDiscoveries";
-// import Galary from "@/components/home/galary/Galary";
+import Gallery from "@/components/home/Gallery/gallery";
 import Banner from "@/components/home/header/Banner";
-import Pricing from "@/components/home/pricing/Pricing";
-import TopFoodSection from "@/components/home/topFoodSection/TopFoodSection";
+import Testimonial from "@/components/home/Testimonials/testimonial";
+import { NewsletterSignup } from "@/components/newsLetter/newsLetter";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <Banner />
       <FoodCategory />
-      <Pricing />
-      {/* <Galary /> */}
-      <FoodDiscoveries />
-      <TopFoodSection/>
+
+      <Testimonial />
+
+      <Gallery />
+      <NewsletterSignup />
     </div>
   );
 }
