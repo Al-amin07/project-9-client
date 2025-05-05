@@ -116,7 +116,7 @@ export const getComment = async () => {
   }
 };
 // ------------add rating----------
-export const addrating = async (commentData: IRating): Promise<any> => {
+
 export const addrating = async (commentData:IRating): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {

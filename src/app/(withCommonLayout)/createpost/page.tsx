@@ -29,6 +29,7 @@ const Createpost = () => {
   const { user } = useAuth()!
   const [loading, setLoading] = useState(false)
   const [categories, setCategories] = useState([])
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
 
   const {
     register,

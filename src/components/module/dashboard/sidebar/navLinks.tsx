@@ -27,11 +27,7 @@ export const adminLinks: ILink[] = [
         href: "/profile",
         icon: UserRoundPenIcon,
     },
-    {
-        title: "Comments",
-        href: "/user/comments",
-        icon: Users,
-    },
+  
 
 
 ];
