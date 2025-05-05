@@ -1,3 +1,8 @@
+import { IComment } from "./comment.type";
+import { IPost } from "./post.type";
+import { IRating } from "./rating.type";
+import { IVote } from "./vote.type";
+
 export interface IUser {
   id: string;
   fullName: string;
@@ -8,7 +13,10 @@ export interface IUser {
   status: "ACTIVE" | "BLOCKED" | "DELETED";
   isDeleted: boolean;
   isPremium: boolean;
-
+  comments: IComment[];
+  posts: IPost[];
+  ratings: IRating[];
+  votes: IVote[];
   createdAt: string;
   updatedAt: string;
 }

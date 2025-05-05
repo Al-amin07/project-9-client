@@ -32,28 +32,28 @@ const GalleryPictureSlider = () => {
   }, [currentIndex]);
 
   return (
-    <div className="">
-      <h1 className="text-center text-[32px] md:text-[40px] font-normal text-primary font-serif my-10">
+    <div className="px-4 md:px-8 lg:px-16">
+      <h1 className="text-center text-[36px] md:text-[44px] font-semibold text-primary font-serif my-10">
         Gallery
       </h1>
 
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid  gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {showingPictures.map((image, index) => (
           <div
             key={index}
-            className="relative w-full h-[240px] md:h-[280px] rounded overflow-hidden transition-all duration-1000 ease-in-out"
+            className="relative cursor-pointer w-full h-[280px] md:h-[340px] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-transform duration-500 transform hover:scale-105"
           >
             <Image
               src={image}
               alt={`Gallery image ${index + 1}`}
               fill
-              className="object-cover rounded-lg"
+              className="object-cover rounded-xl"
             />
           </div>
         ))}
       </div>
 
-      <h2 className="text-center text-semibold  text-lg md:text-xl font-normal text-black font-serif my-10">
+      <h2 className="text-center text-lg md:text-xl font-medium text-gray-700 font-serif my-10">
         Only Admin Can Add Gallery Photo
       </h2>
     </div>

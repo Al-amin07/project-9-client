@@ -25,11 +25,6 @@ export function NavMain({
         title: string
         href: string
         icon?: LucideIcon
-        // isActive?: boolean
-        // items?: {
-        //     title: string
-        //     url: string
-        // }[]
     }[]
 }) {
     const pathname = usePathname()
@@ -45,9 +40,10 @@ export function NavMain({
                     >
                         <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
-                                <SidebarMenuButton className="py-3" tooltip={item.title}>
-                                    {item.icon && <span className=""><item.icon /></span>}
-                                    <Link className={`${pathname === item.href ? "bg-primary text-white" : "text-black"}  py-4 px-4 w-full `} href={item.href}>
+                                <SidebarMenuButton className="py-3 space-y-3" tooltip={item.title}>
+
+                                    <Link className={`${pathname === item.href ? "bg-primary text-white" : "text-black"}  py-4 px-4 w-full flex items-center gap-3 hover:bg-primary hover:text-white transition-colors duration-500 `} href={item.href}>
+                                        {item.icon && <span className=""><item.icon /></span>}
                                         <span>{item.title}</span></Link>
 
                                 </SidebarMenuButton>
