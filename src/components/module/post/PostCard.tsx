@@ -51,7 +51,7 @@ export default function PostCard({ spot }: { spot: IPost & { averageRating: numb
                     </div>
                     <span className="ml-2 text-sm font-medium">{Math.ceil(spot?.ratings!.reduce((a, b) => a + Number(b.value), 0)) || 10}</span>
                 </div>
-                <Button variant="default" size="sm" asChild>
+                <Button variant="ghost" className='hover:bg-primary hover:text-white transction-colors duration-500' size="sm" asChild>
                     <Link href={`/posts/${spot.id}`}>
                         View <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>

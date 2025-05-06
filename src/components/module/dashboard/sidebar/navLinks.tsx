@@ -1,6 +1,6 @@
 import { ILink } from "@/types/link.type";
 import { LucideAlbum, LucidePanelRightInactive, SquareTerminal, UserRoundPenIcon, Users } from "lucide-react";
-
+import { Star } from 'lucide-react';
 export const adminLinks: ILink[] = [
     {
         title: "Dashboard",
@@ -55,7 +55,7 @@ export const userLinks = [
     {
         title: "My Ratings",
         href: "/rating",
-        icon: UserRoundPenIcon,
+        icon: Star,
     },
 ];
 

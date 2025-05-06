@@ -1,9 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, Clock, Users, CalendarDays, ArrowRight } from "lucide-react"
+import { Calendar, MapPin, Clock, Users, CalendarDays } from "lucide-react"
 import img1 from "@/assets/event/1.jpeg"
 import img2 from "@/assets/event/2.jpeg"
 import img3 from "@/assets/event/3'.jpeg"
@@ -55,85 +55,78 @@ export function FoodEvents() {
 
 
     return (
-        <section className="">
-            <div className="container px-4 mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-                    <div>
-                        <h2 className="text-3xl font-bold flex items-center">
-                            <Calendar className="h-7 w-7 mr-2 text-primary" />
-                            Upcoming Food Events
-                        </h2>
-                        <p className="text-gray-600 mt-2">Don&apos;t miss these exciting street food gatherings and festivals</p>
-                    </div>
 
-                    <Button asChild className="mt-4 md:mt-0 bg-primary hover:bg-orange-700 text-white">
-                        <Link href="/events">
-                            <CalendarDays className="h-4 w-4 mr-2" />
-                            View Full Calendar
-                        </Link>
-                    </Button>
+        <section className="container px-4 mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                <div>
+                    <h2 className="text-3xl font-bold flex items-center">
+                        <Calendar className="h-7 w-7 mr-2 text-primary" />
+                        Upcoming Food Events
+                    </h2>
+                    <p className="text-gray-600 mt-2">Don&apos;t miss these exciting street food gatherings and festivals</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {upcomingEvents.map((event) => (
-                        <Card key={event.id} className="overflow-hidden py-0 h-full flex flex-col">
-                            <div className="relative h-40">
-                                <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
-                                <div className="absolute top-2 right-2">
-                                    <Badge className={event.isFree ? "bg-green-600" : "bg-blue-600"}>
-                                        {event.isFree ? "Free" : event.price}
-                                    </Badge>
+                <Button asChild className="mt-4 md:mt-0 bg-primary hover:bg-orange-700 text-white">
+                    <Link href="/events">
+                        <CalendarDays className="h-4 w-4 mr-2" />
+                        View Full Calendar
+                    </Link>
+                </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {upcomingEvents.map((event) => (
+                    <Card key={event.id} className="overflow-hidden py-0 h-full flex flex-col">
+                        <div className="relative h-48">
+                            <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
+                            <div className="absolute top-2 right-2">
+                                <Badge className={event.isFree ? "bg-green-600" : "bg-blue-600"}>
+                                    {event.isFree ? "Free" : event.price}
+                                </Badge>
+                            </div>
+                        </div>
+
+                        <CardHeader className="">
+                            <CardTitle className="text-lg line-clamp-1">{event.title}</CardTitle>
+                            <div className="flex items-center text-sm text-gray-500">
+                                <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
+                                <span className="truncate">{event.location}</span>
+                            </div>
+                        </CardHeader>
+
+                        <CardContent className="py-0 pb-5 flex-grow">
+                            <div className="space-y-2 text-sm mb-2">
+                                <div className="flex items-center text-gray-700">
+                                    <CalendarDays className="h-4 w-4 mr-2 text-orange-600" />
+                                    {event.date}
+                                </div>
+                                <div className="flex items-center text-gray-700">
+                                    <Clock className="h-4 w-4 mr-2 text-orange-600" />
+                                    {event.time}
+                                </div>
+                                <div className="flex items-center text-gray-700">
+                                    <Users className="h-4 w-4 mr-2 text-orange-600" />
+                                    {event.attendees} attending
                                 </div>
                             </div>
 
-                            <CardHeader className="">
-                                <CardTitle className="text-lg line-clamp-1">{event.title}</CardTitle>
-                                <div className="flex items-center text-sm text-gray-500">
-                                    <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
-                                    <span className="truncate">{event.location}</span>
+                            <CardDescription className="line-clamp-2">{event.description}</CardDescription>
+
+                            {event.tags && (
+                                <div className="flex flex-wrap gap-1 mt-3">
+                                    {event.tags.map((tag) => (
+                                        <Badge key={tag} variant="default" className="text-xs rounded-full">
+                                            {tag}
+                                        </Badge>
+                                    ))}
                                 </div>
-                            </CardHeader>
+                            )}
+                        </CardContent>
 
-                            <CardContent className="py-0 flex-grow">
-                                <div className="space-y-2 text-sm mb-2">
-                                    <div className="flex items-center text-gray-700">
-                                        <CalendarDays className="h-4 w-4 mr-2 text-orange-600" />
-                                        {event.date}
-                                    </div>
-                                    <div className="flex items-center text-gray-700">
-                                        <Clock className="h-4 w-4 mr-2 text-orange-600" />
-                                        {event.time}
-                                    </div>
-                                    <div className="flex items-center text-gray-700">
-                                        <Users className="h-4 w-4 mr-2 text-orange-600" />
-                                        {event.attendees} attending
-                                    </div>
-                                </div>
-
-                                <CardDescription className="line-clamp-2">{event.description}</CardDescription>
-
-                                {event.tags && (
-                                    <div className="flex flex-wrap gap-1 mt-2">
-                                        {event.tags.map((tag) => (
-                                            <Badge key={tag} variant="default" className="text-xs rounded-full">
-                                                {tag}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                )}
-                            </CardContent>
-
-                            <CardFooter className="pb-3  ">
-                                <Button variant="ghost" size="sm" asChild className="ml-auto hover:bg-primary hover:text-white transition-colors duration-500">
-                                    <Link href={`/events/${event.id}`}>
-                                        Details <ArrowRight className="ml-1 h-4 w-4" />
-                                    </Link>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    ))}
-                </div>
+                    </Card>
+                ))}
             </div>
         </section>
+
     )
 }

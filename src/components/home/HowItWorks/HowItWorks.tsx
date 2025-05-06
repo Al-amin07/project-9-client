@@ -1,143 +1,138 @@
-import TextSizer from "@/components/shared/TextSizer";
-
-const steps = [
-  {
-    id: "01",
-    title: "Find Interesting Place",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        className="lucide lucide-map-pinned-icon lucide-map-pinned"
-      >
-        <path d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 0 1-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0 1 12 0" />
-        <circle cx="12" cy="8" r="2" />
-        <path d="M8.714 14h-3.71a1 1 0 0 0-.948.683l-2.004 6A1 1 0 0 0 3 22h18a1 1 0 0 0 .948-1.316l-2-6a1 1 0 0 0-.949-.684h-3.712" />
-      </svg>
-    ),
-    description:
-      "Browse restaurants, cafés, and dishes near you.Craving something delicious but not sure where to go? Our food revie..",
-  },
-  {
-    id: "02",
-    title: "Check Reviews",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        className="lucide lucide-sparkles-icon lucide-sparkles"
-      >
-        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
-        <path d="M20 3v4" />
-        <path d="M22 5h-4" />
-        <path d="M4 17v2" />
-        <path d="M5 18H3" />
-      </svg>
-    ),
-    description:
-      "See honest ratings and real user photos.cafés, and street eats around. From honest customer reviews and ratings t...",
-  },
-  {
-    id: "03",
-    title: "Make a Reservation",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        className="lucide lucide-ticket-check-icon lucide-ticket-check"
-      >
-        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
-    description:
-      "Book a table at your favorite restaurants in seconds Choose the date, time, and number of guests",
-  },
-  {
-    id: "04",
-    title: "Share Your Experience",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        className="lucide lucide-message-square-more-icon lucide-message-square-more"
-      >
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        <path d="M8 10h.01" />
-        <path d="M12 10h.01" />
-        <path d="M16 10h.01" />
-      </svg>
-    ),
-    description:
-      "Write reviews, rate dishes, and upload food photos to help others find great meals.",
-  },
-];
+import { Check, Star, Upload, UserPlus, Utensils } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import TextSizer from "@/components/shared/TextSizer"
 
 export default function HowItWorks() {
-  const cardStyles =
-    "bg-white dark:bg-gray-800 rounded-xl shadow px-4 py-5 text-center space-y-2 transition-all cursor-pointer duration-300 shadow-md shadow-[#FF3C48] transition transform hover:-translate-y-1  ";
-
-  const textStyle = "text-gray-600 dark:text-gray-300  ";
   return (
-    <section className="text-center   bg-white relative">
-      <TextSizer title="How It Works Step by Step" desc="Find and share honest food reviews, ratings, and photos to discover the
-        best places to eat around you."/>
-      {/* <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#FF3C48]">
+    <section className="" id="how-it-works">
+      <div className="container px-4 mx-auto">
+        <div className="text-center mb-12">
+          <TextSizer title="How It Works" desc="Discover, share, and enjoy the best street food spots in your city" />
 
-      </h2>
-      <p className="text-gray-500 max-w-xl mx-auto mb-12">
-        Find and share honest food reviews, ratings, and photos to discover the
-        best places to eat around you.
-      </p> */}
+        </div>
 
-      <div className="relative">
-
-        {/* Steps */}
-
-        <div className=" grid grid-cols-2 md:grid-cols-4 gap-10 px-4">
-          {steps.map((step) => (
-            <div key={step.id} className={cardStyles}>
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-10 h-10 border rounded-full bg-white shadow-md flex items-center justify-center text-sm font-semibold text-gray-700  border-primary">
-                {step.id}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+          <Card className="border-0 hover:shadow-primary cursor-pointer shadow-md duration-500 transition-shadow">
+            <CardContent className="pt-6">
+              <div className="rounded-full bg-orange-100 w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                <Utensils className="h-6 w-6 text-orange-600" />
               </div>
+              <h3 className="text-xl font-semibold text-center mb-2">Discover</h3>
+              <p className="text-muted-foreground text-center">
+                Browse through hundreds of street food spots, filter by category, price range, or search by name.
+              </p>
+            </CardContent>
+          </Card>
 
-              <div className=" flex items-center justify-center text-primary">
-                {step.icon}
+          <Card className="border-0  shadow-md  transition-shadow hover:shadow-primary duration-500 cursor-pointer">
+            <CardContent className="pt-6">
+              <div className="rounded-full bg-green-100 w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                <Upload className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-              <p className={textStyle}>{step.description}</p>
+              <h3 className="text-xl font-semibold text-center mb-2">Share</h3>
+              <p className="text-muted-foreground text-center">
+                Post your favorite street food discoveries with photos, location, price, and description.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 hover:shadow-primary cursor-pointer shadow-md duration-500  transition-shadow">
+            <CardContent className="pt-6">
+              <div className="rounded-full bg-blue-100 w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                <Star className="h-6 w-6 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-center mb-2">Rate & Review</h3>
+              <p className="text-muted-foreground text-center">
+                Vote, comment, and rate food spots to help others find the best street food experiences.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 hover:shadow-primary cursor-pointer shadow-md duration-500  transition-shadow">
+            <CardContent className="pt-6">
+              <div className="rounded-full bg-purple-100 w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                <UserPlus className="h-6 w-6 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-center mb-2">Go Premium</h3>
+              <p className="text-muted-foreground text-center">
+                Subscribe to unlock exclusive premium food spots not available to regular users.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mt-16 bg-orange-50 rounded-xl p-8">
+          <h3 className="text-2xl font-bold text-center mb-6">The Approval Process</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-4 border-2 border-orange-500">
+                <span className="font-bold text-orange-500">1</span>
+              </div>
+              <h4 className="text-lg font-medium mb-2">Submit a Food Spot</h4>
+              <p className="text-muted-foreground">
+                Share details about your favorite street food vendor including photos, location, and price.
+              </p>
             </div>
-          ))}
+
+            <div className="flex flex-col items-center text-center">
+              <div className="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-4 border-2 border-orange-500">
+                <span className="font-bold text-orange-500">2</span>
+              </div>
+              <h4 className="text-lg font-medium mb-2">Admin Review</h4>
+              <p className="text-muted-foreground">
+                Our admins review your submission to ensure quality and accuracy before publishing.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-4 border-2 border-orange-500">
+                <span className="font-bold text-orange-500">3</span>
+              </div>
+              <h4 className="text-lg font-medium mb-2">Live on Platform</h4>
+              <p className="text-muted-foreground">
+                Once approved, your food spot goes live for everyone to discover and enjoy!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-bold mb-6">Premium Benefits</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div className="flex items-start p-4 bg-white rounded-lg shadow">
+              <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+              <div className="text-left">
+                <h4 className="font-medium">Exclusive Food Spots</h4>
+                <p className="text-sm text-muted-foreground">Access hidden gems and exclusive street food locations</p>
+              </div>
+            </div>
+
+            <div className="flex items-start p-4 bg-white rounded-lg shadow">
+              <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+              <div className="text-left">
+                <h4 className="font-medium">Premium Content</h4>
+                <p className="text-sm text-muted-foreground">Discover food spots marked as premium by our admins</p>
+              </div>
+            </div>
+
+            <div className="flex items-start p-4 bg-white rounded-lg shadow">
+              <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+              <div className="text-left">
+                <h4 className="font-medium">Special Offers</h4>
+                <p className="text-sm text-muted-foreground">Get access to special discounts and offers from vendors</p>
+              </div>
+            </div>
+
+            <div className="flex items-start p-4 bg-white rounded-lg shadow">
+              <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+              <div className="text-left">
+                <h4 className="font-medium">Priority Support</h4>
+                <p className="text-sm text-muted-foreground">Get faster responses to your questions and issues</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

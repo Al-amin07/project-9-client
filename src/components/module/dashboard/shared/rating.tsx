@@ -34,7 +34,7 @@ export default function Rating({ data }: Props) {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[80px]">Image</TableHead>
-              <TableHead>Title</TableHead>
+              <TableHead>Post Name</TableHead>
               <TableHead>Rating</TableHead>
               <TableHead>Date</TableHead>
             </TableRow>
