@@ -45,3 +45,17 @@ export const getAllPosts = async (query: { [key: string]: string }) => {
     return Error(error);
   }
 };
+export const getHomePagePosts = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post/all`, {
+      next: {
+        revalidate: 60000,
+      },
+      method: "GET",
+    });
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error);
+  }
+};

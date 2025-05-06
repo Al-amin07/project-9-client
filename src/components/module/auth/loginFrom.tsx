@@ -40,7 +40,8 @@ const LoginForm = () => {
     const router = useRouter()
     const searchParams = useSearchParams();
     const { setUser, user } = useAuth()!
-    const redirect = searchParams.get('redirect') || user?.role === "ADMIN" ? "/admin/dashboard" : "/user/dashboard";
+    const redirect = (searchParams.get('redirect')) || (user?.role === "ADMIN" ? '/admin/dashboard' : '/user/dashboard');
+
     const { isSubmitting } = form.formState
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -50,7 +51,7 @@ const LoginForm = () => {
             if (result?.success) {
                 const user = await getCurrentUser() as IUser;
                 setUser(user);
-
+                console.log({ redirect, user: user?.role })
                 toast.success(result?.message || "Login successful")
                 router.push(redirect)
             } else {

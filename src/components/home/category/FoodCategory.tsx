@@ -1,13 +1,15 @@
 "use client";
 import Image from "next/image";
 import { foodCategories } from "./data/foodCategories";
+import TextSizer from "@/components/shared/TextSizer";
 
 const FoodCategory = () => {
   return (
-    <section className="p-12 rounded-2xl  bg-gray-100 dark:bg-gray-800">
-      <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary md:pb-3">Search By Cuisine</h2>
-      <p className="text-center text-gray-600 pb-6">Explore restaurants and cafes by your favorite cuisine</p>
-      <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-6">
+    <section className="p-12 rounded-2xl   dark:bg-gray-800">
+      <TextSizer title="Search By Cuisine" desc="Explore restaurants and cafes by your favorite cuisine" />
+      {/* <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary md:pb-3">Search By Cuisine</h2>
+      <p className="text-center text-gray-600 pb-6">Explore restaurants and cafes by your favorite cuisine</p> */}
+      <div className="grid  grid-cols-2 md:grid-cols-4 gap-6">
         {foodCategories.map((category) => (
           <div
             key={category.id}

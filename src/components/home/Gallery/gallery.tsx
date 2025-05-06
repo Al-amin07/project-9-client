@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import TextSizer from "@/components/shared/TextSizer";
 
 const localImages = [
   "https://i.postimg.cc/J0tJ4D8N/1.jpg",
@@ -33,9 +34,7 @@ const GalleryPictureSlider = () => {
 
   return (
     <div className="px-4 md:px-0">
-      <h1 className="text-center text-[36px] md:text-[44px] font-semibold text-primary font-serif my-10">
-        Gallery
-      </h1>
+      <TextSizer title="Gallery" />
 
       <div className="grid  gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {showingPictures.map((image, index) => (
@@ -53,9 +52,7 @@ const GalleryPictureSlider = () => {
         ))}
       </div>
 
-      <h2 className="text-center text-lg md:text-xl font-medium text-gray-700 font-serif my-10">
-        Only Admin Can Add Gallery Photo
-      </h2>
+
     </div>
   );
 };

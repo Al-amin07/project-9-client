@@ -1,3 +1,5 @@
+import TextSizer from "@/components/shared/TextSizer";
+
 const steps = [
   {
     id: "01",
@@ -106,13 +108,15 @@ export default function HowItWorks() {
   const textStyle = "text-gray-600 dark:text-gray-300  ";
   return (
     <section className="text-center   bg-white relative">
-      <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#FF3C48]">
-        How It Works Step by Step
+      <TextSizer title="How It Works Step by Step" desc="Find and share honest food reviews, ratings, and photos to discover the
+        best places to eat around you."/>
+      {/* <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#FF3C48]">
+
       </h2>
       <p className="text-gray-500 max-w-xl mx-auto mb-12">
         Find and share honest food reviews, ratings, and photos to discover the
         best places to eat around you.
-      </p>
+      </p> */}
 
       <div className="relative">
 

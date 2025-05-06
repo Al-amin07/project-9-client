@@ -1,4 +1,5 @@
 import { ICategory } from "./category.type";
+import { IRating } from "./rating.type";
 import { IUser } from "./user.type";
 
 export type PostStatus = "PENDING" | "APPROVED" | "REJECTED";
@@ -16,6 +17,7 @@ export interface IPost {
   reasons?: string;
   categoryId: string;
   category: ICategory;
+  ratings?: IRating[];
   userId: string;
   user?: IUser;
   createdAt: string;
