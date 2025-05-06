@@ -37,7 +37,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             <div className="flex flex-col  items-center ">
                                 <UserCircle className="w-12 h-12" />
                                 <div className="flex flex-col items-center text-right">
-                                    <span className="text-sm font-medium text-gray-800">{user?.fullName || "John Doe"}</span>
+                                    <span className="text-sm font-medium text-gray-800">{user?.fullName || ""}</span>
                                     <span className="text-xs text-gray-500">{user?.role}</span>
                                 </div>
 

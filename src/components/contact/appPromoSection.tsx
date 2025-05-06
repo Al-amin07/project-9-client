@@ -25,8 +25,8 @@ const AppPromoSection = () => {
             <Image
               src="/image/app-store-img.png"
               alt="App Store"
-              width={150}
-              height={30}
+              width={180}
+              height={50}
             />
           </div>
         </div>

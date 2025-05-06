@@ -56,14 +56,12 @@ export function ViewPostDetailsModal({ post }: { post: IPost }) {
                         <div>
                             <span className="font-medium text-gray-900">Status:</span>{" "}
                             <Badge
-                                variant={
-                                    post.status === "APPROVED"
-                                        ? "default"
-                                        : post.status === "REJECTED"
-                                            ? "destructive"
-                                            : "secondary"
-                                }
-                                className="ml-1"
+
+                                className={`ml-1 rounded-full ${post.status === "APPROVED"
+                                    ? "bg-green-50 text-green-500"
+                                    : post.status === "REJECTED"
+                                        ? "bg-red-50 text-red-500"
+                                        : "bg-yellow-50 text-yellow-500"}`}
                             >
                                 {statusIcon}
                                 {post.status}

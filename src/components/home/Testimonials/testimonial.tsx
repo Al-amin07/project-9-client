@@ -138,7 +138,7 @@ const Testimonial = () => {
 
   return (
     <section className="bg-white  py-12">
-      <div className="max-w-screen-xl mx-auto text-center">
+      <div className=" text-center">
 
         <h2 className="text-3xl lg:text-4xl font-medium mb-5 font-serif text-primary">What Our Premium Users Say </h2>
         <div ref={sliderRef} className="keen-slider mt-6">

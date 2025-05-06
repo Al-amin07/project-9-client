@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { getCurrentUser } from '@/services/auth';
 import { getCredentials } from '@/services/dashboard/admin';
 import { IPost, IUser } from '@/types';
 import { IComment } from '@/types/comment.type';
@@ -17,17 +18,19 @@ interface UserDashboardData {
 export default async function UserDashboard() {
     const url = `${process.env.NEXT_PUBLIC_API}/user/dashboard`;
     const { data } = await getCredentials(url) as { data: UserDashboardData }
-    console.log(data)
+    // user info
+     const userInfo = await getCurrentUser() as IUser;
+            console.log(userInfo);
     return (
         <div className="p-6 space-y-6">
-            <h1 className="text-2xl font-bold">Welcome, {data?.user.fullName || data?.user.email}</h1>
+            <h1 className="text-2xl font-bold">Welcome, {userInfo?.fullName || ""}</h1>
 
             <Card className="bg-slate-50">
                 <CardHeader>
                     <CardTitle className="text-lg">Profile Info</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                    <p><strong>Email:</strong> {data?.user.email}</p>
+                    <p><strong>Email:</strong> {userInfo?.email}</p>
                     <p><strong>Role:</strong> {data?.user.role}</p>
                     <p><strong>Status:</strong> {data?.user.status}</p>
                     <p><strong>Premium:</strong> {data?.user.isPremium ? 'Yes' : 'No'}</p>

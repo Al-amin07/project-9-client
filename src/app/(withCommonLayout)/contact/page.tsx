@@ -8,16 +8,13 @@ export default function ContactPage() {
   return (
     <div>
       <ContactBanner></ContactBanner>
-      <div className="mt-10">
-        {" "}
+
+      <div className="my-12 container mx-auto space-y-10">
         <ContactInfo></ContactInfo>
-      </div>
-      <div className="mt-10">
-        {" "}
         <ContactSection></ContactSection>
       </div>
-      <div className="mt-10">
-        {" "}
+      <div className="">
+
         <AppPromoSection></AppPromoSection>
       </div>
     </div>

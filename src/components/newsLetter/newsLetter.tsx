@@ -12,7 +12,7 @@ export const  NewsletterSignup=()=> {
       </h2>
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 items-center gap-10">
         <div className="flex justify-center md:justify-start">
-          <div className="relative w-full h-[400px]">
+          <div className="relative w-[250px] h-[250px] ">
             <Image
               src="/image/envelope.png"
               alt="Newsletter"
