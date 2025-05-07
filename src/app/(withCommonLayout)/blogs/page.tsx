@@ -1,7 +1,6 @@
-export default async function BlogPage() {
-  return (
-    <div className="">
-      <h1>This is Blog Page</h1>
-    </div>
-  );
+
+import BlogPage from "@/components/blog/Blog";
+
+export default function Blog() {
+  return <BlogPage />
 }

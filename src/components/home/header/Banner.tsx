@@ -1,52 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { FaCartArrowDown } from "react-icons/fa";
-
+import Link from "next/link";
+import { Button } from '@/components/ui/button'
 export default function Banner() {
-  const [animate, setAnimate] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
-    <section className="w-full rounded-2xl  bg-secondary py-18 px-6 my-12 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <div
-        className={`space-y-6 transition-all duration-700 ease-out ${
-          animate ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-        }`}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-[#FF3C48] leading-tight">
-          Delicious Food, Delivered To You
-        </h1>
-        <p className="text-lg text-black dark:text-white max-w-md">
-          Experience mouth-watering meals made with love and delivered fresh to
-          your doorstep. Order now and enjoy exclusive deals!
-        </p>
 
-        <Button className="p-5 cursor-pointer bg-white rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 flex  text-lg items-center gap-2">
-          Order Now <FaCartArrowDown />
-        </Button>
-      </div>
-
-      <div
-        className={`transition-all duration-700 ease-out flex justify-center ${
-          animate ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-        }`}
-      >
+    <div className="w-full h-screen relative inset-0 z-10 pt-28 md:pb-0">
+      <div className="absolute min-h-screen inset-0 -z-10">
         <Image
-          src="/image/home/banner.jpg"
-          alt="Delicious Food"
-          width={500}
-          height={400}
-          className="rounded-2xl shadow-xl"
+          src="/image/banner/home-banner.jpg"
+          alt="Hero Background"
+          fill
+          className="object-cover"
           priority
         />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
-    </section>
+
+      <div className="container mx-auto pt-10 relative z-10 text-white">
+        <div className="h-full grid   items-center text-center">
+          <div className="relative z-10 text-center flex flex-col items-center">
+            <div className=" mx-auto pb-8">
+              <Image
+                src="/image/logo/🦆 icon _dish spoon knife_.png"
+                height={100}
+                width={100}
+                alt="logo icon"
+              />
+              <span className=" text-lg font-mono">Rate My Bite</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+              Discover Amazing Street Food
+            </h1>
+            <p className="text-lg md:text-xl max-w-2xl mb-8 text-gray-200">
+              Find, share, and review the best street food spots in your city. Join our community of food enthusiasts!
+            </p>
+
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
+                <Link href="/posts">Explore Food Spots</Link>
+              </Button>
+              <Button size="lg" variant="secondary" className="">
+                <Link href="/signup">Join Community</Link>
+              </Button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
   );
 }

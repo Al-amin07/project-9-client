@@ -10,6 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 .qodo
+package-lock.json
 
 # testing
 /coverage

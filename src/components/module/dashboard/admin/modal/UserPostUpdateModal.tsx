@@ -37,7 +37,7 @@ export function UserPostUpdateModal({ post }: { post: IPost }) {
         console.log(data)
         const toastId = toast.loading("Creating category...")
         console.log({ data })
-        return
+
         try {
             const result = await createCategory(data)
             if (result?.success) {
@@ -50,7 +50,7 @@ export function UserPostUpdateModal({ post }: { post: IPost }) {
         } catch (error) {
             console.log(error)
         }
-        console.log({ categoryData })
+        // console.log({ categoryData })
     }
 
 

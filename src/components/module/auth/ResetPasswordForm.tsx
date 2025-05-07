@@ -24,8 +24,7 @@ export default function ResetPasswordForm() {
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
     const email = searchParams.get("email")
-    console.log({ token, email })
-    // Initialize the form
+
     const form = useForm<ResetPasswordFormValues>({
         resolver: zodResolver(resetPasswordSchema),
         defaultValues: {
@@ -37,6 +36,7 @@ export default function ResetPasswordForm() {
     const { formState: { isSubmitting } } = form
     async function onSubmit(data: ResetPasswordFormValues) {
         console.log(data)
+        if (!token || !email) return
         // Simulate API call
         const modifiedData = {
             newPassword: data.password,

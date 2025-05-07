@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState } from "react"
@@ -24,6 +25,7 @@ export default function AddCommentForm({ postId }: { postId: string }) {
         text,
         postId,
         userId: user.id,
+        id: "",
       })
 
       if (res?.success) {
@@ -32,8 +34,8 @@ export default function AddCommentForm({ postId }: { postId: string }) {
       } else {
         toast.error(res?.message || "Failed to post comment.")
       }
-    } catch (err) {
-      toast.error("An unexpected error occurred.")
+    } catch (err: any) {
+      toast.error("An unexpected error occurred.", err)
     } finally {
       setLoading(false)
     }

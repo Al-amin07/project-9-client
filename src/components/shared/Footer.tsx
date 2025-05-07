@@ -1,77 +1,139 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { Facebook, Instagram, Twitter } from "lucide-react";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Posts", href: "/posts" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+const locations = ["Dhaka", "Chattogram", "Sylhet", "Rajshahi"];
 
 export default function Footer() {
-  const links = [
-    { label: "Home", href: "/" },
-    { label: "Posts", href: "/posts" },
-    { label: "Blogs", href: "/blogs" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ];
   return (
-    <footer className="bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-12 pb-10 mt-20 border-t border-gray-300 dark:border-gray-700">
-      <div className="container mx-auto px-4 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand Info */}
-          <div>
-            <h2 className="text-xl font-bold text-[#FF3C48] mb-3">
-              WebSite Name
-            </h2>
-            <p className="text-[16px] font-medium">
-              Enjoy delicious meals from our wide range of categories. Fresh,
-              fast, and flavorful — just for you!
-            </p>
-          </div>
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-6 py-12">
+        {/* Header */}
+        <div className="md:flex md:items-center md:justify-between">
+          <h1 className="text-xl font-semibold tracking-tight md:mx-3 xl:text-2xl">
+            Subscribe to our newsletter for <span className="text-primary">tasty updates 🍔</span>
+          </h1>
 
-          {/* Navigation  */}
+          <div className="mt-6 md:mx-3 md:mt-0">
+            <Button
+              variant="destructive"
+              className="inline-flex items-center justify-center px-4 py-2 text-sm"
+            >
+              <span>Join Now</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
+            </Button>
+          </div>
+        </div>
+
+        <hr className="my-8 border-gray-700" />
+
+        {/* Grid Links */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg text-primary font-bold mb-2">Quick Links</h3>
-            <ul className="space-y-2 text-[16px] font-medium ">
-              {links.map((el) => (
-                <li key={el.label}>
-                  <Link href={el.href} className="hover:text-primary">
-                    {el.label}
-                  </Link>
-                </li>
+            <p className="font-semibold">Quick Links</p>
+            <div className="mt-5 space-y-2">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-gray-300 hover:text-primary hover:underline "
+                >
+                  {link.label}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* Contact & Social */}
-
+          {/* Food Locations */}
           <div>
-            <h3 className="text-lg text-[#FF3C48] font-bold mb-4">
-              Get in Touch
-            </h3>
-            <p className="text-[16px] font-medium">Email: support@foods.com</p>
-            <p className="text-[16px] font-medium">Phone: +880 1234-567890</p>
+            <p className="font-semibold">Food Locations</p>
+            <div className="mt-5 space-y-2">
+              {locations.map((location) => (
+                <a
+                  key={location}
+                  href="#"
+                  className="block text-gray-300 hover:underline hover:text-primary"
+                >
+                  {location}
+                </a>
+              ))}
+            </div>
+          </div>
 
-            <div className="flex flex-wrap mt-5 gap-3">
-              <Link
-                href="#"
-                className="px-5 py-2 rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 text-sm"
-              >
-                Facebook
-              </Link>
-              <Link
-                href="#"
-                className="px-5 py-2 rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 text-sm"
-              >
-                Instagram
-              </Link>
-              <Link
-                href="#"
-                className="px-5 py-2 rounded-full border-2 border-[#FF3C48] text-[#FF3C48] hover:bg-[#FF3C48] hover:text-white font-semibold transition duration-300 text-sm"
-              >
-                Twitter
-              </Link>
+          {/* Categories */}
+          <div>
+            <p className="font-semibold">Categories</p>
+            <div className="mt-5 space-y-2">
+              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+                Street Food
+              </a>
+              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+                Fine Dining
+              </a>
+              <a href="#" className="block text-gray-300 hover:underline hover:text-primary">
+                Cafés & Desserts
+              </a>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <p className="font-semibold">Contact Us</p>
+            <div className="mt-5 space-y-2">
+              <a href="tel:+8807684734978" className="block text-gray-300 hover:underline hover:text-primary">
+                +880 768 473 4978
+              </a>
+              <a href="mailto:info@foodreview.com" className="block text-gray-300 hover:underline hover:text-primary">
+                info@foodreview.com
+              </a>
+              <div className="flex items-center space-x-3">
+                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Facebook /></a>
+                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Instagram /></a>
+                <a href="" className="p-2 hover:bg-primary text-white rounded-full transition-colors duration-500"><Twitter /></a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom line */}
-        <div className="mt-10 text-center text-md text-[#FF3C48] dark:text-[#FF3C48]">
-          &copy; {new Date().getFullYear()} Foods. All rights reserved.
+        <hr className="my-8 border-gray-700" />
+
+        {/* Footer Bottom */}
+        <div className="flex flex-col items-center justify-between sm:flex-row">
+          <div className="">
+            <Image
+              src="/image/logo/🦆 icon _dish spoon knife_.png"
+              height={80}
+              width={80}
+              alt="logo icon"
+            />
+            <span className=" text-lg font-mono">Rate My Bite</span>
+          </div>
+          <p className=" text-sm text-gray-400 sm:mt-0">© 2025 Food Review. All rights reserved.</p>
         </div>
       </div>
     </footer>

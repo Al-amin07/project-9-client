@@ -87,7 +87,9 @@ export const updatePost = async (
   }
 };
 // ------------add comment----------
-export const addcomment = async (commentData: IComment): Promise<any> => {
+export const addcomment = async (
+  commentData: Partial<IComment>
+): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
       method: "POST",
@@ -104,7 +106,7 @@ export const addcomment = async (commentData: IComment): Promise<any> => {
   }
 };
 // ------------add rating----------
-export const addrating = async (commentData: IRating): Promise<any> => {
+export const addrating = async (commentData: Partial<IRating>) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rating`, {
       method: "POST",
@@ -120,7 +122,7 @@ export const addrating = async (commentData: IRating): Promise<any> => {
     return Error(error);
   }
 };
-export const addvote = async (voteData: IVote): Promise<any> => {
+export const addvote = async (voteData: Partial<IVote>): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/vote`, {
       method: "POST",

@@ -13,6 +13,7 @@ import { toast } from "sonner"
 import { IPost } from "@/types"
 import { ICategory } from "@/types/category.type"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 
 interface FormData {
@@ -200,9 +201,11 @@ const Createpost = () => {
             required
           />
           {imagePreview && (
-            <img
+            <Image
               src={imagePreview}
               alt="Preview"
+              width={200}
+              height={200}
               className="mt-3 rounded-md w-full h-60 object-cover border"
             />
           )}

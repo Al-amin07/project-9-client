@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState } from "react"
@@ -32,8 +33,8 @@ export default function AddRatingForm({ postId }: { postId: string }) {
       } else {
         toast.error(res?.message || "Failed to submit rating.")
       }
-    } catch (err) {
-      toast.error("An unexpected error occurred.")
+    } catch (err: any) {
+      toast.error("An unexpected error occurred.", err)
     } finally {
       setLoading(false)
     }

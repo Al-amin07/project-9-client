@@ -4,6 +4,7 @@ import "keen-slider/keen-slider.min.css";
 
 import "./testimonial.css"
 import Image from "next/image";
+import TextSizer from "@/components/shared/TextSizer";
 
 // const ResizePlugin: KeenSliderPlugin = (slider) => {
 //   const observer = new ResizeObserver(() => {
@@ -138,9 +139,9 @@ const Testimonial = () => {
 
   return (
     <section className="bg-white  py-12">
-      <div className="max-w-screen-xl mx-auto text-center">
+      <div className=" text-center">
 
-        <h2 className="text-3xl lg:text-4xl font-medium mb-5 font-serif text-primary">What Our Premium Users Say </h2>
+        <TextSizer title="What Our Premium Users Say" />
         <div ref={sliderRef} className="keen-slider mt-6">
           {testimonials.map((testimonial) => (
             <div key={testimonial.name} className="keen-slider__slide p-4">
@@ -175,9 +176,6 @@ const Testimonial = () => {
                 <p className="mt-4 text-left line-clamp-3 text-gray-700">{testimonial.testimonial}</p>
                 <p className="text-left text-sm mt-4 text-gray-500">--{testimonial.location}</p>
               </blockquote>
-
-
-
             </div>
           ))}
         </div>

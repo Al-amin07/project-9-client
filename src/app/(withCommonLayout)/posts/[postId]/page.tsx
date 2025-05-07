@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // app/posts/[postId]/page.tsx
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -12,16 +13,19 @@ import AddVoteForm from "./add-vote-form"
 import AddRatingForm from "./add-rating-form"
 import { MessageSquare } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { IVote } from "@/types/vote.type"
+import { IRating } from "@/types/rating.type"
+import { IComment } from "@/types/comment.type"
 
-export default async function PostPage({ params }: { params: { postId: string } }) {
-  const res = await getSinglePost(params.postId)
+export default async function PostPage(props: any) {
+  const res = await getSinglePost(props?.params.postId)
   if (!res || res instanceof Error) return notFound()
   const post = res.data
 
-  const upvotes = post.votes?.filter((v: any) => v.status === "UPVOTE").length || 0
-  const downvotes = post.votes?.filter((v: any) => v.status === "DOWNVOTE").length || 0
+  const upvotes = post.votes?.filter((v: IVote) => v.status === "UPVOTE").length || 0
+  const downvotes = post.votes?.filter((v: IVote) => v.status === "DOWNVOTE").length || 0
   const averageRating =
-    post.ratings?.reduce((acc: number, r: any) => acc + r.value, 0) / post.ratings.length || 0
+    post.ratings?.reduce((acc: number, r: IRating) => acc + r.value, 0) / post.ratings.length || 0
 
   return (
     <div className="container py-8">
@@ -73,58 +77,58 @@ export default async function PostPage({ params }: { params: { postId: string } 
             </div>
           </div>
 
-         
+
           <Separator />
 
           {/* Add Comment/Rating/Vote Forms */}
-         <div className="flex  justify-between items-center gap-4 mt-4">
-         <AddCommentForm postId={post.id} />
-         <AddVoteForm postId={post.id} />
-         <AddRatingForm postId={post.id} />
-         </div>
-         
-         
+          <div className="flex  justify-between items-center gap-4 mt-4">
+            <AddCommentForm postId={post.id} />
+            <AddVoteForm postId={post.id} />
+            <AddRatingForm postId={post.id} />
+          </div>
+
+
 
           <Separator />
 
-     
-           {/* Display Comments */}
-           {post.comments?.length > 0 && (
-  <div className="mt-8">
-    <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
-      <MessageSquare className="w-5 h-5 text-red-500" />
-      All Comments
-    </h2>
-    <ul className="space-y-4">
-      {post.comments.map((comment: any, idx: number) => (
-        <li
-          key={comment.id}
-          className="flex items-start gap-4 bg-muted p-4 rounded-lg shadow-sm border"
-        >
-          {/* Avatar - use fallback if not available */}
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="/placeholder.svg" alt="user" />
-            <AvatarFallback className="bg-red-500">U</AvatarFallback>
-          </Avatar>
 
-          {/* Comment Body */}
-          <div className="flex-1">
-            <div className="text-sm text-muted-foreground">{comment.text}</div>
-            <p className="text-xs text-gray-500 mt-1">
-              Posted on{" "}
-              {new Date(comment.createdAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
-            {idx !== post.comments.length - 1 && <Separator className="mt-3" />}
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+          {/* Display Comments */}
+          {post.comments?.length > 0 && (
+            <div className="mt-8">
+              <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                <MessageSquare className="w-5 h-5 text-red-500" />
+                All Comments
+              </h2>
+              <ul className="space-y-4">
+                {post.comments.map((comment: IComment, idx: number) => (
+                  <li
+                    key={comment.id}
+                    className="flex items-start gap-4 bg-muted p-4 rounded-lg shadow-sm border"
+                  >
+                    {/* Avatar - use fallback if not available */}
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src="/placeholder.svg" alt="user" />
+                      <AvatarFallback className="bg-red-500">U</AvatarFallback>
+                    </Avatar>
+
+                    {/* Comment Body */}
+                    <div className="flex-1">
+                      <div className="text-sm text-muted-foreground">{comment.text}</div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Posted on{" "}
+                        {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </p>
+                      {idx !== post.comments.length - 1 && <Separator className="mt-3" />}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
         </CardContent>
 

@@ -10,6 +10,7 @@ import { IPost, IUser } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function ViewPostDetailsModal({ post }: { post: IPost }) {
     const statusIcon =
@@ -29,7 +30,9 @@ export function ViewPostDetailsModal({ post }: { post: IPost }) {
 
             <DialogContent className="max-w-2xl p-4 pt-8 overflow-hidden rounded-xl">
                 <div className="flex  gap-4">
-                    <img
+                    <Image
+                        width={200}
+                        height={200}
                         src={post?.image}
                         alt={post?.title}
                         className="w-full flex-1 h-32 object-cover"
@@ -56,14 +59,12 @@ export function ViewPostDetailsModal({ post }: { post: IPost }) {
                         <div>
                             <span className="font-medium text-gray-900">Status:</span>{" "}
                             <Badge
-                                variant={
-                                    post.status === "APPROVED"
-                                        ? "default"
-                                        : post.status === "REJECTED"
-                                            ? "destructive"
-                                            : "secondary"
-                                }
-                                className="ml-1"
+
+                                className={`ml-1 rounded-full ${post.status === "APPROVED"
+                                    ? "bg-green-50 text-green-500"
+                                    : post.status === "REJECTED"
+                                        ? "bg-red-50 text-red-500"
+                                        : "bg-yellow-50 text-yellow-500"}`}
                             >
                                 {statusIcon}
                                 {post.status}

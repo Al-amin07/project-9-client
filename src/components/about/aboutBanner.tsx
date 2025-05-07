@@ -18,7 +18,7 @@ const AboutBanner = () => {
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4 md:pb-20">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 ">
           {" "}
-          About <span className="text-[#FF3C48]">Khaite Khaite</span>
+          About <span className="text-[#FF3C48]">Rate My Bite</span>
         </h1>
         <div className="w-2/3 mx-auto">
         <p className="text-xl ">

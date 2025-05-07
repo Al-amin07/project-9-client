@@ -76,7 +76,7 @@ export function PostUpdateModal({ post, onSubmit }: { post: IPost, onSubmit: (id
                                 control={form.control}
                                 name="reasons"
 
-                                render={({ }) => (
+                                render={({ field }) => (
                                     <FormItem >
                                         <FormLabel>Reasons</FormLabel>
                                         <FormControl>
@@ -86,7 +86,7 @@ export function PostUpdateModal({ post, onSubmit }: { post: IPost, onSubmit: (id
                                                 rows={4}
                                                 placeholder="Tell us a little bit about yourself"
                                                 className=""
-
+                                                {...field}
                                             />
                                         </FormControl>
 
