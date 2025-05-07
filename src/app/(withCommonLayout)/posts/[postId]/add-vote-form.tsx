@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState } from "react"
@@ -30,8 +31,8 @@ export default function AddVoteForm({ postId }: { postId: string }) {
       } else {
         toast.error(res?.message || "Failed to submit vote.")
       }
-    } catch (err) {
-      toast.error("Something went wrong while voting.")
+    } catch (err: any) {
+      toast.error("Something went wrong while voting.", err)
     } finally {
       setLoading(false)
     }

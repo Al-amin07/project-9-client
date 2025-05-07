@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 "use server";
-import { Ipost, IpostComment, IpostVote, Irating } from "@/types";
+
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { IRating } from '../../types/rating.type';
 import { IVote } from "@/types/vote.type";
+import { IComment } from "@/types/comment.type";
+import { IPost } from "@/types";
 
 // get all products
 // lib/api.ts
@@ -45,7 +47,7 @@ export const getSinglePost = async (postId: string) => {
 };
 
 // add product
-export const createPost = async (postData:Ipost): Promise<any> => {
+export const createPost = async (postData:IPost): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/post`, {
       method: "POST",
@@ -64,7 +66,7 @@ export const createPost = async (postData:Ipost): Promise<any> => {
 
 // ------------ update product --------------
 export const updatePost = async (
-  postData: Ipost,
+  postData: IPost,
   productId: string
 ): Promise<any> => {
   try {
@@ -85,7 +87,9 @@ export const updatePost = async (
   }
 };
 // ------------add comment----------
-export const addcomment = async (commentData:IpostComment): Promise<any> => {
+export const addcomment = async (
+  commentData: Partial<IComment>
+): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/comments`, {
       method: "POST",

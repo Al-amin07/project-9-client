@@ -45,7 +45,7 @@ export function UserPostsTable({ data, meta, isPaginate = true }: PostsTableProp
             router.push(`?${params.toString()}`);
         }
 
-    }, [currentPage])
+    }, [currentPage, router, searchParams, meta, isPaginate])
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat("en-US", {
             style: "currency",

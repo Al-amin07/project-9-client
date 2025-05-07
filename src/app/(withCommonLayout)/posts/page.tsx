@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
@@ -11,6 +12,8 @@ import { getAllposts } from "@/services/posts"
 import { getAllCategory } from "@/services/category"
 import { IPost } from "@/types"
 import { ICategory } from "@/types/category.type"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 
 const POSTS_PER_PAGE = 6
@@ -34,6 +37,7 @@ export default function PostsPage() {
     const fetchCategories = async () => {
       try {
         const res = await getAllCategory()
+
         setAllCategories(res?.data || [])
       } catch (err: any) {
         console.error("Failed to load categories", err)
@@ -43,6 +47,7 @@ export default function PostsPage() {
   }, [])
 
   // 🔄 Fetch Posts
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPosts = async () => {
     setLoading(true)
     try {
@@ -53,6 +58,7 @@ export default function PostsPage() {
         minPrice,
         maxPrice,
       })
+      console.log(res)
       setPosts(res?.data || [])
       setTotalPages(Math.ceil((res?.meta?.total || 1) / POSTS_PER_PAGE))
     } catch (error) {
@@ -65,7 +71,7 @@ export default function PostsPage() {
   // 🔁 Re-fetch when filters or page change
   useEffect(() => {
     fetchPosts()
-  }, [currentPage, searchTerm, category, location, minPrice, maxPrice])
+  }, [searchTerm, category, location, minPrice, maxPrice, currentPage])
 
   const handleFilter = () => {
     setCurrentPage(1)
@@ -216,16 +222,34 @@ export default function PostsPage() {
 
           {/* Pagination */}
           <div className="flex justify-center items-center mt-6 gap-2">
+            <Button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
+            >
+              <ArrowLeft />
+            </Button>
             {Array.from({ length: totalPages }, (_, i) => (
-              <button
+              <Button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
+<<<<<<< HEAD
                 className={`px-3 py-1 rounded border text-sm ${currentPage === i + 1 ? "bg-red-600 text-white" : "hover:bg-gray-100"
+=======
+                className={`px-4 py-1.5 rounded border  ${currentPage === i + 1 ? "bg-primary text-white" : "bg-transparent text-black hover:bg-primary hover:text-white"}
+>>>>>>> 19f19e79afc37a4cafdf5d1faa5efc8d2ac5438e
                   }`}
               >
                 {i + 1}
-              </button>
+              </Button>
             ))}
+            <Button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className={`px-3 py-1 rounded bg-transparent text-black hover:bg-primary hover:text-white transition-colors duration-300 `}
+            >
+              <ArrowRight />
+            </Button>
           </div>
         </div>
       </div>

@@ -121,7 +121,7 @@ export function UsersTable({ data, meta, isPaginate = true }: UsersTableProps) {
             params.set("page", String(currentPage));
             router.push(`?${params.toString()}`);
         }
-    }, [currentPage])
+    }, [currentPage, isPaginate, meta, router, searchParams]);
 
     return (
         <div className="space-y-4">

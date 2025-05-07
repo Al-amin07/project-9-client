@@ -14,6 +14,7 @@ import { uploadToCloudinary } from "@/components/utils/uploadToCloudinary";
 import { createCategory } from "@/services/dashboard/admin";
 import { ICategory } from "@/types/category.type";
 import { Plus } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -94,7 +95,9 @@ export function CreateCategoryModal() {
                                     required
                                 />
                                 {imagePreview && (
-                                    <img
+                                    <Image
+                                        width={50}
+                                        height={50}
                                         src={imagePreview}
                                         alt="Preview"
                                         className=" rounded-md w-16 h-10 object-cover border"

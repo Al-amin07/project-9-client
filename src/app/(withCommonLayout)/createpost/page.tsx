@@ -13,6 +13,7 @@ import { toast } from "sonner"
 import { IPost } from "@/types"
 import { ICategory } from "@/types/category.type"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 
 interface FormData {
@@ -195,6 +196,7 @@ const Createpost = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-600">Images</label>
@@ -204,6 +206,42 @@ const Createpost = () => {
               accept="image/*"
               onChange={(e) => handleImageChange(e.target.files)}
               className="w-full px-3 py-2 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+=======
+        {/* Category */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+          <select
+            {...register("categoryId")}
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#FF6168]"
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat: any) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Upload Image */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
+          <input
+            {...register("image")}
+            type="file"
+            accept="image/*"
+            className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-[#FF6168]/10 file:text-[#FF6168] hover:file:bg-[#FF6168]/20"
+            required
+          />
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              alt="Preview"
+              width={200}
+              height={200}
+              className="mt-3 rounded-md w-full h-60 object-cover border"
+>>>>>>> 19f19e79afc37a4cafdf5d1faa5efc8d2ac5438e
             />
             {imageFiles.length === 0 && (
               <p className="text-red-500 text-sm">At least one image is required</p>

@@ -60,7 +60,7 @@ export function CategoryTable({ data, meta, isPaginate = true }: CategoryTablePr
             params.set("page", String(currentPage));
             router.push(`?${params.toString()}`);
         }
-    }, [currentPage])
+    }, [currentPage, isPaginate, meta, router, searchParams])
 
     return (
         <div className="space-y-4">
