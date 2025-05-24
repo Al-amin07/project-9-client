@@ -1,19 +1,20 @@
 import TextSizer from '@/components/shared/TextSizer'
 import { MapPin, Star, Users, Utensils } from 'lucide-react'
 import React from 'react'
+import Count from './Count'
 const stats = [
     {
         label: "Food Spots",
-        value: "1,200+",
+        value: 1200,
         icon: <Utensils className="h-8 w-8 mx-auto mb-2 text-orange-600" />,
     },
     {
         label: "Active Users",
-        value: "50,000+",
+        value: 50000,
         icon: <Users className="h-8 w-8 mx-auto mb-2 text-orange-600" />,
     },
-    { label: "Reviews", value: "85,000+", icon: <Star className="h-8 w-8 mx-auto mb-2 text-orange-600" /> },
-    { label: "Cities", value: "120+", icon: <MapPin className="h-8 w-8 mx-auto mb-2 text-orange-600" /> },
+    { label: "Reviews", value: 85000, icon: <Star className="h-8 w-8 mx-auto mb-2 text-orange-600" /> },
+    { label: "Cities", value: 120, icon: <MapPin className="h-8 w-8 mx-auto mb-2 text-orange-600" /> },
 ]
 export default function Community() {
 
@@ -25,8 +26,10 @@ export default function Community() {
                     {stats?.map((stat, index) => (
                         <div key={index} className="p-6">
                             {stat.icon}
-                            <p className="text-3xl font-bold mb-1">{stat.value}</p>
-                            <p className="text-gray-500">{stat.label}</p>
+
+                            <Count label={stat.label} target={Number(stat.value)} />
+
+
                         </div>
                     ))}
                 </div>

@@ -9,7 +9,7 @@ export default function Banner() {
   return (
 
     <div className="w-full h-screen relative inset-0 z-10 pt-28 md:pb-0">
-      <div className="absolute min-h-screen inset-0 -z-10">
+      <div className="absolute min-h-[calc(100vh-3.5rem)]   inset-0 -z-10">
         <Image
           src="/image/banner/home-banner.jpg"
           alt="Hero Background"
@@ -17,7 +17,7 @@ export default function Banner() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       <div className="container mx-auto pt-10 relative z-10 text-white">
@@ -33,7 +33,7 @@ export default function Banner() {
               <span className=" text-lg font-mono">Rate My Bite</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Discover Amazing Street Food
+              Discover Amazing <span className="text-primary">Street Food</span>
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8 text-gray-200">
               Find, share, and review the best street food spots in your city. Join our community of food enthusiasts!
@@ -41,7 +41,7 @@ export default function Banner() {
 
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
                 <Link href="/posts">Explore Food Spots</Link>
               </Button>
               <Button size="lg" variant="secondary" className="">
