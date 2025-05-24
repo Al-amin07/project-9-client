@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Button } from '@/components/ui/button'
-export default function Banner() {
+export default function Banner({ image, title, desc }: { image?: string | StaticImageData, title?: string, desc?: string }) {
 
 
   return (
 
-    <div className="w-full h-screen relative inset-0 z-10 pt-28 md:pb-0">
-      <div className="absolute min-h-[calc(100vh-3.5rem)]   inset-0 -z-10">
+    <div className="w-full h-[calc(100vh-5rem)] cursor-pointer relative inset-0 z-10 pt-5 lg:pt-28 md:pb-0">
+      <div className="absolute min-h-[calc(100vh-5rem)]   inset-0 -z-10">
         <Image
-          src="/image/banner/home-banner.jpg"
+          src={image || "/image/banner/home-banner.jpg"}
           alt="Hero Background"
           fill
           className="object-cover"
@@ -23,7 +23,7 @@ export default function Banner() {
       <div className="container mx-auto pt-10 relative z-10 text-white">
         <div className="h-full grid   items-center text-center">
           <div className="relative z-10 text-center flex flex-col items-center">
-            <div className=" mx-auto pb-8">
+            <div className=" mx-auto pb-4">
               <Image
                 src="/image/logo/🦆 icon _dish spoon knife_.png"
                 height={100}
@@ -33,10 +33,10 @@ export default function Banner() {
               <span className=" text-lg font-mono">Rate My Bite</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Discover Amazing <span className="text-primary">Street Food</span>
+              {title || "Discover the Best Street Food Spots!"}
             </h1>
-            <p className="text-lg md:text-xl max-w-2xl mb-8 text-gray-200">
-              Find, share, and review the best street food spots in your city. Join our community of food enthusiasts!
+            <p className="text-lg md:text-xl max-w-2xl mb-8 text-gray-100/90">
+              {desc || "Join our community to explore, rate, and share your favorite street food experiences. From hidden gems to popular stalls, find the best bites in your city!"}
             </p>
 
 

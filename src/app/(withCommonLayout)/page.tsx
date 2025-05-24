@@ -4,14 +4,15 @@ import Discover from "@/components/home/discover";
 import FeatureFoodSpot from "@/components/home/FeatureFoodSpot/FeatureFoodSpot";
 import { FoodEvents } from "@/components/home/food-event/FoodEvents";
 import Gallery from "@/components/home/Gallery/gallery";
-import Banner from "@/components/home/header/Banner";
 import SubscriptionPlans from "@/components/home/subscription/SubscriptionPlans";
 import HowItWorks from "@/components/home/HowItWorks/HowItWorks";
 import Testimonial from "@/components/home/Testimonials/testimonial";
+import Header from "@/components/home/header/Header";
 export default function Home() {
   return (
     <div className="space-y-10">
-      <Banner />
+      {/* <Banner /> */}
+      <Header />
       <div className="container  space-y-24 mx-auto">
         <FoodCategory />
         <FeatureFoodSpot />

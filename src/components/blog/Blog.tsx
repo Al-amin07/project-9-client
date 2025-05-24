@@ -186,13 +186,14 @@ export default function BlogPage() {
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Blog Header */}
-            <div className="bg-primary/85 text-white py-16">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Street Food Stories</h1>
-                    <p className="text-xl max-w-3xl mx-auto text-center">
-                        Discover the culture, history, and flavors of street food from around the world
-                    </p>
-                </div>
+
+            <div className="text-center mb-1 px-4 py-12">
+                <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Street Food  <span className="text-primary">Stories</span>
+                </h1>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Discover the culture, history, and flavors of street food from around the world
+                </p>
             </div>
 
             <div className="container mx-auto px-4 py-12">
