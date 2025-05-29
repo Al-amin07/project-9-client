@@ -13,7 +13,7 @@ export default function Home() {
     <div className="space-y-10">
       {/* <Banner /> */}
       <Header />
-      <div className="container  space-y-24 mx-auto">
+      <div className="max-w-7xl  space-y-24 mx-auto">
         <FoodCategory />
         <FeatureFoodSpot />
         <FoodEvents />

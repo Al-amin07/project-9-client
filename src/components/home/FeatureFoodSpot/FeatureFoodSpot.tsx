@@ -41,7 +41,7 @@ export default async function FeatureFoodSpot() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
                                 postsWithAverage?.slice(0, 6)?.map((spot) => (
-                                    <PostCard key={spot.id} spot={spot} />
+                                    <PostCard key={spot.id} post={spot} />
                                 ))}
                         </div>
                     </TabsContent>
@@ -50,7 +50,7 @@ export default async function FeatureFoodSpot() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
                                 postsWithAverage?.slice(3, 9)?.map((spot) => (
-                                    <PostCard key={spot.id} spot={spot} />
+                                    <PostCard key={spot.id} post={spot} />
                                 ))}
                         </div>
                     </TabsContent>
@@ -58,7 +58,7 @@ export default async function FeatureFoodSpot() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
                                 postsWithAverage?.slice(6, 12)?.map((spot) => (
-                                    <PostCard key={spot.id} spot={spot} />
+                                    <PostCard key={spot.id} post={spot} />
                                 ))}
                         </div>
                     </TabsContent>

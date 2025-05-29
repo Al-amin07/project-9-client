@@ -26,11 +26,11 @@ export default function PostsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(true)
-  const params = useSearchParams()
+
 
   // Filters
   const [searchTerm, setSearchTerm] = useState("")
-  const [category, setCategory] = useState(params.get("category") || "")
+  const [category, setCategory] = useState("")
   const [location, setLocation] = useState("")
   const [minPrice, setMinPrice] = useState("")
   const [maxPrice, setMaxPrice] = useState("")
