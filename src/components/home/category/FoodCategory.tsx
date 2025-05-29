@@ -26,11 +26,11 @@ const FoodCategory = async () => {
               height={300}
               className="w-full min-h-[300px] object-cover"
             />
-            <div className="px-3 py-1 z-10 group-hover:-translate-y-8 transition-all duration-500 flex flex-col gap-1 items-center justify-center w-full absolute bottom-0 text-center">
+            <div className="px-3 py-1 z-10 translate-y-4 group-hover:-translate-y-5 transition-all duration-500 flex flex-col gap-1 items-center justify-center w-full absolute bottom-0 text-center">
               <h3 className="text-2xl  font-bold text-white">
                 {category?.name}
               </h3>
-              <span className=" block transition-all duration-500 opacity-0 rounded-full p-2 border group-hover:opacity-100"	><ArrowRight className="h-6 w-6 text-white" /></span>
+              <span className=" block transition-all duration-500 opacity-0 rounded-full p-1 border hover:bg-primary hover:text-white group-hover:opacity-100 hover:border-primary"	><ArrowRight className="h-6 w-6 text-white" /></span>
             </div>
             <div className="absolute inset-0 bg-black opacity-10 group-hover:opacity-30 transition-opacity duration-300"></div>
 
