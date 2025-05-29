@@ -15,8 +15,6 @@ import { ICategory } from "@/types/category.type"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PuffLoader } from "react-spinners"
-import { useSearchParams } from "next/navigation"
-
 
 const POSTS_PER_PAGE = 6
 
