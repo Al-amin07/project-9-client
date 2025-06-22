@@ -188,7 +188,7 @@ export default function BlogPage() {
             {/* Blog Header */}
 
             <div className="text-center mb-1 px-4 py-12">
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                <h1 className="text-4xl  font-bold text-gray-900 mb-6">
                     Street Food  <span className="text-primary">Stories</span>
                 </h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">

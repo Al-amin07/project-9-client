@@ -9,7 +9,7 @@ export default function Banner({ image, title, desc }: { image?: string | Static
   return (
 
     <div className="w-full h-[calc(100vh-5rem)] cursor-pointer relative inset-0 z-10 pt-5 lg:pt-28 md:pb-0">
-      <div className="absolute min-h-[calc(100vh-5rem)]   inset-0 -z-10">
+      <div className="absolute min-h-screen   inset-0 -z-10">
         <Image
           src={image || "/image/banner/home-banner.jpg"}
           alt="Hero Background"

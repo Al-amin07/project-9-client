@@ -19,7 +19,7 @@ export default async function UserPosts({ searchParams }: { searchParams: Promis
                     <Link href={'/createpost'}><Button>Create Post</Button></Link>
                 </div>
                 {
-                    data?.data && data?.data?.length === 0 ? <UserPostsTable data={data?.data} meta={data?.meta} /> : <div className='flex justify-center items-center bg-gray-50 rounded-md h-40'>
+                    data?.data && data?.data?.length !== 0 ? <UserPostsTable data={data?.data} meta={data?.meta} /> : <div className='flex justify-center  items-center bg-gray-50 rounded-md h-40'>
 
                         <h1 className='text-2xl font-semibold text-slate-700'> No Post Found</h1>
                     </div>

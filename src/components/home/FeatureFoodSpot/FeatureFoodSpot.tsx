@@ -11,6 +11,7 @@ import React from 'react'
 
 export default async function FeatureFoodSpot() {
     const { data } = await getHomePagePosts()! as { data: IPost[] }
+    console.log('FeatureFoodSpot data:', data)
     const postsWithAverage =
         data?.map((post) => {
             const values = post?.ratings!.map((r) => r.value);

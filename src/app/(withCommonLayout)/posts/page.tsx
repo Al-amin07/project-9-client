@@ -15,6 +15,7 @@ import { ICategory } from "@/types/category.type"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PuffLoader } from "react-spinners"
+import { MdErrorOutline } from "react-icons/md";
 
 const POSTS_PER_PAGE = 6
 
@@ -122,9 +123,9 @@ export default function PostsPage() {
       </div>
 
       {/* Layout */}
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col relative  lg:flex-row gap-6">
         {/* Filters */}
-        <aside className="w-full dark:text-gray-600  lg:w-1/4 border p-4 rounded-md shadow-sm bg-white">
+        <aside className="w-full lg:sticky lg:top-32 h-[360px] dark:text-gray-600  lg:w-1/4 border p-4 rounded-md shadow-sm bg-white">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
 
           <div className="mb-4">
@@ -193,7 +194,10 @@ export default function PostsPage() {
                 />
               </div>
             ) : posts.length === 0 ? (
-              <p>No posts found.</p>
+              <div className='col-span-3 h-[330px] flex gap-5  justify-center  items-center bg-gray-50 rounded-md '>
+                <MdErrorOutline size={30} />
+                <h1 className='text-2xl font-semibold text-slate-700'> No Post Found</h1>
+              </div>
             ) : (
               posts?.map((post) => (
                 <Link href={`/posts/${post.id}`} key={post?.id} className="group">
@@ -233,7 +237,7 @@ export default function PostsPage() {
 
           {/* Pagination */}
           {
-            !loading && <div className="flex justify-center items-center mt-6 gap-2">
+            !loading && posts.length !== 0 && <div className="flex justify-center items-center mt-6 gap-2">
               <Button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(currentPage - 1)}

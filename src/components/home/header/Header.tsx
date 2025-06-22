@@ -18,17 +18,18 @@ import b3 from '@/assets/banner/b5.avif'
 export default function Header() {
     const imageLists = [
 
-        {
-            src: b1,
-            alt: "Banner 2",
-            title: "Share Your Food Experience",
-            desc: "Upload photos, write reviews, and rate meals to help others find the tastiest dishes in town."
-        },
+
         {
             src: b2,
             alt: "Banner 1",
             title: "Find the Best Bites Near You",
             desc: "Instantly discover top-reviewed places to eat in your area. Compare dishes, see photos, and leave your own ratings to guide fellow foodies."
+        },
+        {
+            src: b1,
+            alt: "Banner 2",
+            title: "Share Your Food Experience",
+            desc: "Upload photos, write reviews, and rate meals to help others find the tastiest dishes in town."
         },
         {
             src: b3,
@@ -54,7 +55,7 @@ export default function Header() {
                 spaceBetween={0}
                 slidesPerView={1}
                 modules={[Pagination]}
-                className="mySwiper max-w-[1460px] min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)]"
+                className="mySwiper max-w-[1460px] min-h-[calc(100vh-4rem)] md:min-h-screen"
             >
                 {
                     imageLists?.map(el => <SwiperSlide key={el.alt}>
