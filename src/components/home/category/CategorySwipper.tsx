@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,6 +9,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useRef } from "react";
+// gdg
 export default function CategorySwipper({ data }: { data: ICategory[] }) {
     const swiperRef = useRef<any>(null);
     return (
