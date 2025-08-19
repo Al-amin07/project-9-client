@@ -35,13 +35,14 @@ const Navbar = () => {
       <div className="container mx-auto  px-4 md:px-0 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 p-0 ">
-          <Image
+          <h1 className="italic text-2xl py-4">Rate <span className="text-primary font-bold">My Bite</span></h1>
+          {/* <Image
             src="/image/logo/logo.png"
             alt="Logo"
             width={120}
             height={120}
             className=""
-          />
+          /> */}
 
         </Link>
 

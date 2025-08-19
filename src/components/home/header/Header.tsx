@@ -55,7 +55,7 @@ export default function Header() {
                 spaceBetween={0}
                 slidesPerView={1}
                 modules={[Pagination]}
-                className="mySwiper max-w-[1460px] min-h-[calc(100vh-4rem)] md:min-h-screen"
+                className="mySwiper max-w-[1460px] max-h-[600px]  lg:max-h-[800px] "
             >
                 {
                     imageLists?.map(el => <SwiperSlide key={el.alt}>
