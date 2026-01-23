@@ -1,0 +1,42 @@
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  max-height: 100vh;
+  border-radius: 10px;
+}
+
+.number-slide1 {
+  background: url("../../../assets//banner/1.jpg") no-repeat center center;
+  width: 100%;
+}
+.number-slide2 {
+  background: url("../../../assets//banner/2.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+}
+.number-slide3 {
+  background: url("../../../assets//banner/9.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+}
+.number-slide4 {
+  background: url("../../../assets//banner/8.jpeg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+}
+.number-slide5 {
+  background: url("../../../assets//banner/7.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+}
+.number-slide6 {
+  background: url("../../../assets//banner/6.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+}
